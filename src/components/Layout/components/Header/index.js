@@ -1,8 +1,9 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass, faSpinner, faXmarkCircle } from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass, faPlus, faSpinner, faXmarkCircle } from '@fortawesome/free-solid-svg-icons';
 import Tippy from '@tippyjs/react/headless';
 import classNames from 'classnames/bind';
 
+import Button from '~/components/Button';
 import { Wrapper as WrapperResult } from '~/components/Popper';
 import Image from '~/assets/images';
 import style from './Header.module.scss';
@@ -28,7 +29,7 @@ function Header() {
                     render={(attrs) => (
                         <div className={cx('search-result')} tabIndex="-1" {...attrs}>
                             <WrapperResult>
-                               <h4 className={cx('search-title')}> Accounts</h4>
+                                <h4 className={cx('search-title')}> Accounts</h4>
                                 <AccountItem />
                                 <AccountItem />
                                 <AccountItem />
@@ -49,7 +50,17 @@ function Header() {
                         </button>
                     </div>
                 </Tippy>
-                <div className="action">Action</div>
+                <div className="action">
+                    <Button def iconLeft = { <FontAwesomeIcon className={cx('plus-icon')} icon={faPlus} />}>Upload</Button>
+                    <Button
+                        primary
+                        onClick={() => {
+                            alert('clicked');
+                        }}
+                    >
+                        Log in
+                    </Button>
+                </div>
             </div>
         </header>
     );
