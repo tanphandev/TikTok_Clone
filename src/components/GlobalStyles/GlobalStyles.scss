@@ -4,8 +4,10 @@
 	--primary-color:#fe2c55;
 	--black-color: #000;
 	--while-color: #fff;
+	--text-color:#161823;
 	--default-layout-header-width : 1150px;
 	--default-layout-header-height : 60px;
+	--default-layout-header-spacer : 24px
 
 }
 
@@ -20,6 +22,7 @@ html {
 }
 
 body {
+	color: var(--text-color);
 	line-height: 1.5 rem;
 	font-size: 1.6 rem;
 	font-family: 'IBM Plex Sans', sans-serif;
@@ -29,4 +32,21 @@ body {
 input, button, [tabindex] {
 	outline: none;
 	border: none;
+}
+
+body {
+	.tippy-box {
+		border-radius: 8px;
+		font-weight: 500;
+		font-size: 1.5rem;
+		background-color: rgba(84, 84, 84, 0.92);
+		color: rgb(255, 255, 255);
+	}
+	.tippy-content {
+		padding: 8px 9px;
+	}
+
+	.tippy-arrow:before {
+		color: rgba(84, 84, 84, 0.92);
+	}
 }
