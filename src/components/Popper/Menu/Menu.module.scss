@@ -3,14 +3,42 @@
 
 	.menu-item {
 		width: 100%;
-		font-weight: 600;
+		height: 42px;
+		font-weight: 500;
 		display: flex;
-		padding: 11px 8px 11px 14px;
+		padding: 10px 8px 10px 14px;
 		margin-left: 0;
 		align-items: center;
 
 		&:hover {
-			background-color: rgba(22, 24, 35, 0.03);;
+			background-color: rgba(22, 24, 35, 0.03);
 		}
 	} 
+}
+
+// menu header
+.header-wrapper {
+	position: relative;
+	height: 50px;
+	font-size: 1.7rem;
+	margin-top: -8px;
+}
+
+.back-btn {
+	padding: 0 4px 0 28px;
+	height: 100%;
+	cursor: pointer;
+	background-color: transparent;
+}
+
+.header-title {
+	position: absolute;
+	font-weight: 500;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+}
+
+.sperate {
+	border-top: 1px solid rgba(22, 24, 35, 0.12);
 }
