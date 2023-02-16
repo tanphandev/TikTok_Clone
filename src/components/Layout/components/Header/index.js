@@ -2,7 +2,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faArrowRightFromBracket,
     faEllipsisVertical,
-    faMagnifyingGlass,
     faPlus,
     faSpinner,
     faXmarkCircle,
@@ -13,7 +12,7 @@ import classNames from 'classnames/bind';
 
 import Button from '~/components/Button';
 import { Wrapper as WrapperResult } from '~/components/Popper';
-import Image from '~/assets/images';
+import images from '~/assets/images';
 import style from './Header.module.scss';
 import { useEffect, useState } from 'react';
 import AccountItem from '~/components/AccountItem';
@@ -21,14 +20,14 @@ import Menu from '~/components/Popper/Menu';
 import 'tippy.js/dist/tippy.css';
 import {
     faCopyright,
-    faEnvelopeOpen,
     faKeyboard,
-    faMessage,
     faPaperPlane,
     faQuestionCircle,
     faSun,
     faUser,
 } from '@fortawesome/free-regular-svg-icons';
+import { InboxIcon, MessagesIcon, SearchIcon } from '~/components/icons';
+import Image from '~/components/Image';
 const cx = classNames.bind(style);
 const MENU_ITEMS = [
     {
@@ -82,9 +81,9 @@ const userMenu = [
         icon: <FontAwesomeIcon icon={faArrowRightFromBracket} />,
         title: 'Log out',
         to: '/logout',
-        sperate: true
-    }
-]
+        sperate: true,
+    },
+];
 // handle Logic
 const handleOnchange = (item) => {
     console.log(item);
@@ -102,7 +101,7 @@ function Header() {
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
                 <div className={cx('logo')}>
-                    <img src={Image.logo} alt="TikTok" />
+                    <img src={images.logo} alt="TikTok" />
                 </div>
                 <TippyHeadless
                     interactive
@@ -127,7 +126,7 @@ function Header() {
                         </button>
                         <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />
                         <button className={cx('search-btn')}>
-                            <FontAwesomeIcon icon={faMagnifyingGlass} />
+                            <SearchIcon />
                         </button>
                     </div>
                 </TippyHeadless>
@@ -139,12 +138,12 @@ function Header() {
                         <>
                             <Tippy content={'Messages'}>
                                 <button className={cx('action-icon')}>
-                                    <FontAwesomeIcon icon={faMessage} />
+                                    <MessagesIcon className={cx('messages-icon')}/>
                                 </button>
                             </Tippy>
                             <Tippy content={'Inbox'}>
                                 <button className={cx('action-icon')}>
-                                    <FontAwesomeIcon icon={faEnvelopeOpen} />
+                                    <InboxIcon className={cx('inbox-icon')}/>
                                 </button>
                             </Tippy>
                         </>
@@ -158,12 +157,13 @@ function Header() {
                             Log in
                         </Button>
                     )}
-                    <Menu items={currentUser ? (userMenu) : (MENU_ITEMS)} onChange={handleOnchange}>
+                    <Menu items={currentUser ? userMenu : MENU_ITEMS} onChange={handleOnchange}>
                         {currentUser ? (
-                            <img
+                            <Image
                                 className={cx('personal-avatar')}
-                                src="https://p16-sign-sg.tiktokcdn.com/aweme/100x100/tos-alisg-avt-0068/3911de057bcd7b230b5310a43888426d.jpeg?x-expires=1676620800&x-signature=ZWGq6KZyiLhK770vTySM2N0bRck%3D"
+                                src="adhttps://p16-sign-sg.tiktokcdn.com/aweme/100x100/tos-alisg-avt-0068/3911de057bcd7b230b5310a43888426d.jpeg?x-expires=1676620800&x-signature=ZWGq6KZyiLhK770vTySM2N0bRck%3D"
                                 alt="Tan Phan"
+                                fallBack = 'https://p16-sign-va.tiktokcdn.com/musically-maliva-obj/1594805258216454~c5_720x720.jpeg?x-expires=1676696400&x-signature=6%2F5PVBUkgVIGHYFfCku0EgI4mNE%3D'
                             />
                         ) : (
                             <button className={cx('more-btn')}>
