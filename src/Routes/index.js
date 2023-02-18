@@ -4,14 +4,12 @@ import Profile from '~/Pages/Profile';
 import Upload from '~/Pages/Upload';
 import { OnlyHeader } from '~/components/Layout';
 const publicRoutes = [
-	{path : '/', component: Home},
-	{path : '/following', component: Following},
-	{path : '/profile', component: Profile},
-	{path : '/upload', component: Upload, layout: OnlyHeader}
-]
+    { path: '/', component: Home },
+    { path: '/following', component: Following },
+    { path: '/:nickname', component: Profile },
+    { path: '/upload', component: Upload, layout: OnlyHeader },
+];
 
-const privateRoutes = [
-	
-]
+const privateRoutes = [];
 
-export { publicRoutes, privateRoutes }
+export { publicRoutes, privateRoutes };
