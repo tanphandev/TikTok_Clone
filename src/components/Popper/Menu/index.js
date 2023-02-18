@@ -8,7 +8,7 @@ import MenuItem from './MenuItem';
 const cx = classNames.bind(style);
 
 const defaultFn = () => {};
-function Menu({ children, items, onChange = { defaultFn } }) {
+function Menu({ children, items, hideOnClick = false, onChange = { defaultFn } }) {
     const [history, setHistory] = useState([{ data: items }]);
     const current = history[history.length - 1];
     const renderItem = () =>
@@ -30,6 +30,7 @@ function Menu({ children, items, onChange = { defaultFn } }) {
         <Tippy
             offset={[12, 10]}
             delay={[0, 700]}
+            hideOnClick={hideOnClick}
             interactive
             placement="bottom-end"
             render={(attrs) => (
@@ -43,7 +44,7 @@ function Menu({ children, items, onChange = { defaultFn } }) {
                                 }}
                             />
                         )}
-                        {renderItem()}
+                        <div className={cx('menu-body')}>{renderItem()}</div>
                     </WrapperList>
                 </div>
             )}
