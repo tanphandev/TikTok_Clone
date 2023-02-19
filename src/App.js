@@ -1,6 +1,7 @@
 import { Fragment } from 'react';
-import { DefaultLayout} from '~/components/Layout';
+import { DefaultLayout } from '~/Layouts';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+// eslint-disable-next-line no-unused-vars
 import { publicRoutes, privateRoutes } from '~/Routes';
 function App() {
     return (
@@ -17,7 +18,7 @@ function App() {
                         }
                         return (
                             <Route
-                                key={index} 
+                                key={index}
                                 path={route.path}
                                 element={
                                     <Layout>

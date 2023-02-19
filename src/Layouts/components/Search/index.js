@@ -5,7 +5,7 @@ import { useEffect, useState, useRef } from 'react';
 import classNames from 'classnames/bind';
 import style from './Search.module.scss';
 
-import * as searchService from '~/apiServices/searchService';
+import * as searchService from '~/services/searchService';
 import { useDebounce } from '~/hooks';
 import { Wrapper as WrapperResult } from '~/components/Popper';
 import AccountItem from '~/components/AccountItem';
