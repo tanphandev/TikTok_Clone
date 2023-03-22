@@ -1,15 +1,8 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRightFromBracket, faEllipsisVertical, faPlus } from '@fortawesome/free-solid-svg-icons';
 import Tippy from '@tippyjs/react';
-import classNames from 'classnames/bind';
 import { Link } from 'react-router-dom';
-
-import config from '~/configs';
-import Button from '~/components/Button';
-import images from '~/assets/images';
-import style from './Header.module.scss';
-import Menu from '~/components/Popper/Menu';
-import 'tippy.js/dist/tippy.css';
+import classNames from 'classnames/bind';
 import {
     faCopyright,
     faKeyboard,
@@ -18,9 +11,16 @@ import {
     faSun,
     faUser,
 } from '@fortawesome/free-regular-svg-icons';
-import { InboxIcon, MessagesIcon } from '~/components/icons';
-import Image from '~/components/Image';
+
+import Button from '~/components/Button';
+import Menu from '~/components/Popper/Menu';
 import Search from '../Search';
+import config from '~/configs';
+import images from '~/assets/images';
+import Image from '~/components/Image';
+import style from './Header.module.scss';
+import 'tippy.js/dist/tippy.css';
+import { InboxIcon, MessagesIcon } from '~/assets/icons';
 const cx = classNames.bind(style);
 const MENU_ITEMS = [
     {
