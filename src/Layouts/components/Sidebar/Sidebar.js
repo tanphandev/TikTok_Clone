@@ -4,6 +4,7 @@ import Menu, { MenuItem } from './Menu';
 import style from './Sidebar.module.scss';
 import config from '~/configs';
 import { HomeIcon, HomeActiveIcon, UserGroupIcon, UserGroupActiveIcon, LiveIcon, LiveActiveIcon } from '~/assets/icons';
+import SuggestAccount from './SuggestAccounts/SuggestAccounts';
 
 const cx = classNames.bind(style);
 function Sidebar() {
@@ -19,6 +20,8 @@ function Sidebar() {
                 />
                 <MenuItem title="LIVE" to={config.routes.live} icon={<LiveIcon />} iconActive={<LiveActiveIcon />} />
             </Menu>
+            <SuggestAccount isPreviewAccount={true} title="Suggested Accounts" />
+            <SuggestAccount isPreviewAccount={false} title="Following Accounts" />
         </div>
     );
 }

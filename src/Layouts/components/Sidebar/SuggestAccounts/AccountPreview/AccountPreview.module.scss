@@ -1,0 +1,55 @@
+.account-preview {
+    width: 320px;
+    padding: 20px;
+}
+.title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+.image {
+    width: 44px;
+    height: 44px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.name {
+    display: flex;
+    align-items: center;
+    font-size: 1.8em;
+    line-height: 2.2rem;
+    font-weight: 700;
+    color: var(--text-color);
+}
+.icon {
+    width: 1.4rem;
+    height: 1.4rem;
+    color: #20d5ec;
+    margin-left: 4px;
+    margin-top: -4px;
+}
+.nickname {
+    font-size: 1.4rem;
+    line-height: 2rem;
+    font-weight: 600;
+    color: var(--text-color);
+}
+.status {
+    display: flex;
+    font-size: 1.7rem;
+    line-height: 2.2rem;
+    margin-top: 10px;
+}
+.followers,
+.likes {
+    span {
+        font-weight: 700;
+        margin-right: 6px;
+        font-size: 17px;
+        line-height: 20px;
+    }
+}
+.followers {
+    margin-right: 12px;
+}
