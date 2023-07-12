@@ -1,36 +1,66 @@
 import classNames from 'classnames/bind';
 
 import AccountItem from './AccountItem';
+import { useEffect, useState } from 'react';
+
 import style from './SuggestAccounts.module.scss';
+import { getUserSuggested } from '~/services/userService';
 
 const cx = classNames.bind(style);
 
 function SuggestAccount({ title, isPreviewAccount }) {
+    const [userSuggested, setUserSuggested] = useState([]);
+    const [page, setPage] = useState(1);
+    const [extendUser, setExtendUser] = useState(false);
+    console.log(userSuggested);
+    useEffect(() => {
+        const fetchAPI = async () => {
+            try {
+                const res = await getUserSuggested(page, 10);
+                if (page == 1) {
+                    setUserSuggested(res.data);
+                } else {
+                    setUserSuggested((prev) => [...prev, ...res.data]);
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        fetchAPI();
+    }, [page]);
     return (
         <div className={cx('wrapper')}>
             <p className={cx('title')}>{title}</p>
-            <AccountItem
-                image="https://p16-sign-va.tiktokcdn.com/tos-useast2a-avt-0068-giso/0995309d9b40283f49325641059892f6~c5_100x100.jpeg?x-expires=1679626800&x-signature=nQsROJltqTRlHX8FQY0XaJ8xwGI%3D"
-                name="Tran Nguyen Hoang Nam"
-                nickName="namhoang6789"
-                check
-                isPreview={isPreviewAccount}
-            />
-            <AccountItem
-                image="https://p16-sign-va.tiktokcdn.com/tos-useast2a-avt-0068-giso/0995309d9b40283f49325641059892f6~c5_100x100.jpeg?x-expires=1679626800&x-signature=nQsROJltqTRlHX8FQY0XaJ8xwGI%3D"
-                name="Phan Tan"
-                nickName="tanphan222"
-                check
-                isPreview={isPreviewAccount}
-            />
-            <AccountItem
-                image="https://p16-sign-va.tiktokcdn.com/tos-useast2a-avt-0068-giso/0995309d9b40283f49325641059892f6~c5_100x100.jpeg?x-expires=1679626800&x-signature=nQsROJltqTRlHX8FQY0XaJ8xwGI%3D"
-                name="Phan Tan"
-                nickName="tanphan222"
-                check
-                isPreview={isPreviewAccount}
-            />
-            <p className={cx('more-btn')}>See all</p>
+            {userSuggested.map((user, index) => (
+                <AccountItem
+                    image={user.avatar}
+                    name={user.nickname}
+                    check={user.tick}
+                    isPreview={isPreviewAccount}
+                    key={index}
+                />
+            ))}
+            {extendUser ? (
+                <p
+                    className={cx('less-btn')}
+                    onClick={() => {
+                        setPage(1);
+                        setExtendUser(false);
+                    }}
+                >
+                    See less
+                </p>
+            ) : (
+                <p
+                    className={cx('more-btn')}
+                    onClick={() => {
+                        setPage(2);
+                        setExtendUser(true);
+                    }}
+                >
+                    See all
+                </p>
+            )}
         </div>
     );
 }

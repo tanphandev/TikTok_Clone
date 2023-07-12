@@ -21,7 +21,6 @@ function Sidebar() {
                 <MenuItem title="LIVE" to={config.routes.live} icon={<LiveIcon />} iconActive={<LiveActiveIcon />} />
             </Menu>
             <SuggestAccount isPreviewAccount={true} title="Suggested Accounts" />
-            <SuggestAccount isPreviewAccount={false} title="Following Accounts" />
         </div>
     );
 }
