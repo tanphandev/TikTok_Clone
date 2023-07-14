@@ -12,7 +12,6 @@ function SuggestAccount({ title, isPreviewAccount }) {
     const [userSuggested, setUserSuggested] = useState([]);
     const [page, setPage] = useState(1);
     const [extendUser, setExtendUser] = useState(false);
-    console.log(userSuggested);
     useEffect(() => {
         const fetchAPI = async () => {
             try {
@@ -34,7 +33,8 @@ function SuggestAccount({ title, isPreviewAccount }) {
             {userSuggested.map((user, index) => (
                 <AccountItem
                     image={user.avatar}
-                    name={user.nickname}
+                    nickName={user.nickname}
+                    name={`${user.first_name} ${user.last_name}`}
                     check={user.tick}
                     isPreview={isPreviewAccount}
                     key={index}

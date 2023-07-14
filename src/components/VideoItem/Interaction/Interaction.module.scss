@@ -1,0 +1,22 @@
+.wraper {
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.icon {
+    display: flex;
+    justify-content: center;
+    font-size: 2rem;
+    width: 4rem;
+    height: 4rem;
+    background-color: #f1f1f2;
+    align-items: center;
+    border-radius: 50%;
+}
+.quantity {
+    font-size: 1.4rem;
+    color: var(--text-color);
+    padding: 4px 0;
+}

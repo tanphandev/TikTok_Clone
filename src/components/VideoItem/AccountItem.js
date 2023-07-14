@@ -1,15 +1,15 @@
 import TippyHeadless from '@tippyjs/react/headless';
 /* eslint-disable jsx-a11y/img-redundant-alt */
-import AccountPreview from './AccountPreview/';
+import AccountPreview from '~/Layouts/components/Sidebar/SuggestAccounts/AccountPreview';
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 
-import style from './SuggestAccounts.module.scss';
+import style from './VideoItem.module.scss';
 import ImageComp from '~/components/Image';
 
 const cx = classNames.bind(style);
-function AccountItem({ image, name, nickName, check, isPreview }) {
+function AccountItem({ image, name, nickName, description, check, isPreview }) {
     const renderPreview = (props) => (
         <div className="preview" tabIndex="-1" {...props}>
             <AccountPreview />
@@ -26,6 +26,7 @@ function AccountItem({ image, name, nickName, check, isPreview }) {
                             {check && <FontAwesomeIcon className={cx('icon')} icon={faCheckCircle} />}
                         </h4>
                         <span className={cx('nickname')}>{nickName}</span>
+                        <p className={cx('description')}>{description}</p>
                     </div>
                 </div>
             </TippyHeadless>
