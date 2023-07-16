@@ -1,0 +1,24 @@
+.wrapper {
+    position: relative;
+    display: flex;
+    border: 1px solid rgba(22, 24, 35, 0.12);
+    width: 80%;
+    margin-bottom: 16px;
+    height: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.option-icon {
+    position: absolute;
+    left: 10px;
+    top: 0px;
+    transform: translateY(50%);
+}
+.content {
+    font-size: 1.4rem;
+    font-weight: 600;
+}

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRightFromBracket, faEllipsisVertical, faPlus } from '@fortawesome/free-solid-svg-icons';
 import Tippy from '@tippyjs/react';
@@ -21,6 +22,7 @@ import Image from '~/components/Image';
 import style from './Header.module.scss';
 import 'tippy.js/dist/tippy.css';
 import { InboxIcon, MessagesIcon } from '~/assets/icons';
+import LoginModel from '~/modal/LoginModal';
 const cx = classNames.bind(style);
 const MENU_ITEMS = [
     {
@@ -83,7 +85,8 @@ const handleOnchange = (item) => {
 };
 
 function Header() {
-    const currentUser = true;
+    const [isOpenLoginModal, setIsOpenLoginModal] = useState(false);
+    const currentUser = false;
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
@@ -111,8 +114,16 @@ function Header() {
                             </Tippy>
                         </>
                     ) : (
-                        <Button primary>Log in</Button>
+                        <Button
+                            onClick={() => {
+                                setIsOpenLoginModal(true);
+                            }}
+                            primary
+                        >
+                            Log in
+                        </Button>
                     )}
+                    {isOpenLoginModal && <LoginModel closeLoginModal={setIsOpenLoginModal} />}
                     <Menu items={currentUser ? userMenu : MENU_ITEMS} onChange={handleOnchange}>
                         {currentUser ? (
                             <Image
