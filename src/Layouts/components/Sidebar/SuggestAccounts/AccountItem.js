@@ -9,10 +9,17 @@ import style from './SuggestAccounts.module.scss';
 import ImageComp from '~/components/Image';
 
 const cx = classNames.bind(style);
-function AccountItem({ image, name, nickName, check, isPreview }) {
+function AccountItem({ image, name, nickName, check, isPreview, followersCount, likesCount }) {
     const renderPreview = (props) => (
         <div className="preview" tabIndex="-1" {...props}>
-            <AccountPreview />
+            <AccountPreview
+                image={image}
+                name={name}
+                nickName={nickName}
+                check={check}
+                followersCount={followersCount}
+                likesCount={likesCount}
+            />
         </div>
     );
     return (
@@ -21,11 +28,11 @@ function AccountItem({ image, name, nickName, check, isPreview }) {
                 <div className={cx('account-item')}>
                     <ImageComp className={cx('account-picture')} src={image} alt="account-picture" />
                     <div className={cx('account-info')}>
-                        <h4 className={cx('name')}>
-                            {name}
+                        <h4 className={cx('nickname')}>
+                            {nickName}
                             {check && <FontAwesomeIcon className={cx('icon')} icon={faCheckCircle} />}
                         </h4>
-                        <span className={cx('nickname')}>{nickName}</span>
+                        <span className={cx('name')}>{name}</span>
                     </div>
                 </div>
             </TippyHeadless>

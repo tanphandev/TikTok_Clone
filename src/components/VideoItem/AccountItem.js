@@ -9,10 +9,17 @@ import style from './VideoItem.module.scss';
 import ImageComp from '~/components/Image';
 
 const cx = classNames.bind(style);
-function AccountItem({ image, name, nickName, description, check, isPreview }) {
+function AccountItem({ image, name, nickName, description, check, isPreview, followersCount, likesCount }) {
     const renderPreview = (props) => (
         <div className="preview" tabIndex="-1" {...props}>
-            <AccountPreview />
+            <AccountPreview
+                image={image}
+                name={name}
+                nickName={nickName}
+                check={check}
+                followersCount={followersCount}
+                likesCount={likesCount}
+            />
         </div>
     );
     return (

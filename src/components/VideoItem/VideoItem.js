@@ -13,6 +13,8 @@ function VideoItem({ videoData }) {
                     name={videoData.user.first_name + ' ' + videoData.user.last_name}
                     nickName={videoData.user.nickname}
                     description={videoData.description}
+                    followersCount={videoData.user.followers_count}
+                    likesCount={videoData.user.likes_count}
                     isPreview={true}
                 />
                 <Button className={cx('following-btn')} small outline>

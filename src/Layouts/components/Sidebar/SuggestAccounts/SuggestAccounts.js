@@ -27,6 +27,7 @@ function SuggestAccount({ title, isPreviewAccount }) {
         };
         fetchAPI();
     }, [page]);
+    console.log(userSuggested);
     return (
         <div className={cx('wrapper')}>
             <p className={cx('title')}>{title}</p>
@@ -37,6 +38,8 @@ function SuggestAccount({ title, isPreviewAccount }) {
                     name={`${user.first_name} ${user.last_name}`}
                     check={user.tick}
                     isPreview={isPreviewAccount}
+                    followersCount={user.followers_count}
+                    likesCount={user.likes_count}
                     key={index}
                 />
             ))}

@@ -33,16 +33,16 @@
 .account-info {
     color: var(--text-color);
     .name {
+        font-size: 1.2rem;
+        line-height: 1.5rem;
+        font-weight: 400;
+    }
+
+    .nickname {
         display: flex;
         font-size: 1.6rem;
         line-height: 2.2rem;
         font-weight: 700;
-    }
-
-    .nickname {
-        font-size: 1.2rem;
-        line-height: 1.5rem;
-        font-weight: 400;
     }
 }
 .icon {
