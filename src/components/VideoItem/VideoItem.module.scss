@@ -14,6 +14,7 @@
     display: flex;
     align-items: center;
     margin-top: 12px;
+    user-select: none;
 
     .account-picture {
         width: 6rem;
@@ -24,15 +25,16 @@
 }
 
 .account-info {
+    margin-left: 10px;
     .name {
+        font-size: 1.4rem;
+        font-weight: 400;
+    }
+    .nickname {
         font-size: 1.8rem;
         display: inline;
         font-weight: 700;
         margin-right: 0.8rem;
-    }
-    .nickname {
-        font-size: 1.4rem;
-        font-weight: 400;
     }
 
     .description {
@@ -44,15 +46,45 @@
     margin-bottom: 20px;
 }
 
-.content {
-    display: inline-block;
+.music {
+    display: flex;
     font-size: 1.6rem;
     font-weight: 500;
     margin-bottom: 10px;
 }
 
+.music-icon {
+    margin-right: 4px;
+}
+
 .video-wrapper {
     display: flex;
+
+    .content-wrapper {
+        position: relative;
+
+        .control-wrapper {
+            position: absolute;
+            bottom: 26px;
+            left: 0;
+            display: flex;
+            width: 100%;
+            font-size: 2rem;
+            justify-content: space-between;
+            padding: 0 40px;
+        }
+        .control-icon {
+            color: #fff;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.5s linear;
+        }
+
+        &:hover .control-icon {
+            visibility: visible;
+            opacity: 1;
+        }
+    }
 }
 
 .video {
@@ -66,4 +98,5 @@
     align-self: flex-end;
     margin-left: 30px;
     margin-bottom: 10px;
+    user-select: none;
 }

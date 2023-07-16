@@ -1,15 +1,33 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay, faPause, faVolumeHigh, faVolumeXmark } from '@fortawesome/free-solid-svg-icons';
 import classNames from 'classnames/bind';
-import style from './VideoControl.module.scss';
+import style from '../VideoItem.module.scss';
 const cx = classNames.bind(style);
-function VideoControl() {
+function VideoControl({ isPlaying, isMute, setIsPlaying, setIsMute }) {
+    const handleSetIsPlayingFalse = () => {
+        setIsPlaying(false);
+    };
+    const handleSetIsPlayingTrue = () => {
+        setIsPlaying(true);
+    };
+    const handleSetIsMuteTrue = () => {
+        setIsMute(true);
+    };
+    const handleSetIsMuteFalse = () => {
+        setIsMute(false);
+    };
     return (
-        <div className={cx('wrapper')}>
-            <FontAwesomeIcon className={cx('play-icon')} icon={faPlay} />
-            <FontAwesomeIcon className={cx('pause-icon')} icon={faPause} />
-            <FontAwesomeIcon className={cx('volumn-on-icon')} icon={faVolumeHigh} />
-            <FontAwesomeIcon className={cx('volumn-off-icond')} icon={faVolumeXmark} />
+        <div className={cx('control-wrapper')}>
+            {isPlaying ? (
+                <FontAwesomeIcon onClick={handleSetIsPlayingFalse} className={cx('control-icon')} icon={faPause} />
+            ) : (
+                <FontAwesomeIcon onClick={handleSetIsPlayingTrue} className={cx('control-icon')} icon={faPlay} />
+            )}
+            {isMute ? (
+                <FontAwesomeIcon onClick={handleSetIsMuteFalse} className={cx('control-icon')} icon={faVolumeXmark} />
+            ) : (
+                <FontAwesomeIcon onClick={handleSetIsMuteTrue} className={cx('control-icon')} icon={faVolumeHigh} />
+            )}
         </div>
     );
 }

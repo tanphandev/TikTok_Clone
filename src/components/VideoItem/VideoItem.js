@@ -4,22 +4,22 @@ import AccountItem from './AccountItem';
 import Video from './Video';
 import Button from '../Button';
 const cx = classNames.bind(style);
-function VideoItem({ image, name, nickName, description, isPreview = true, onClick }) {
+function VideoItem({ videoData }) {
     return (
         <div className={cx('wrapper')}>
             <div className={cx('user-wrapper')}>
                 <AccountItem
-                    image="https://hoayeuthuong.com/hoa-tuoi/hoa-hong/11534_hoa-hong-hong-do-sa-30-bong"
-                    name={'Tan Phan'}
-                    nickName={'TanPhan222'}
-                    description={'description'}
+                    image={videoData.user.avatar}
+                    name={videoData.user.first_name + ' ' + videoData.user.last_name}
+                    nickName={videoData.user.nickname}
+                    description={videoData.description}
                     isPreview={true}
                 />
                 <Button className={cx('following-btn')} small outline>
                     Following
                 </Button>
             </div>
-            <Video />
+            <Video videoData={videoData} />
         </div>
     );
 }

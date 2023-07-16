@@ -21,11 +21,11 @@ function AccountItem({ image, name, nickName, description, check, isPreview }) {
                 <div className={cx('account-item')}>
                     <ImageComp className={cx('account-picture')} src={image} alt="account-picture" />
                     <div className={cx('account-info')}>
-                        <h4 className={cx('name')}>
-                            {name}
+                        <h4 className={cx('nickname')}>
+                            {nickName}
                             {check && <FontAwesomeIcon className={cx('icon')} icon={faCheckCircle} />}
                         </h4>
-                        <span className={cx('nickname')}>{nickName}</span>
+                        <span className={cx('name')}>{name}</span>
                         <p className={cx('description')}>{description}</p>
                     </div>
                 </div>
