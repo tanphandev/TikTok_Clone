@@ -27,7 +27,6 @@ function SuggestAccount({ title, isPreviewAccount }) {
         };
         fetchAPI();
     }, [page]);
-    console.log(userSuggested);
     return (
         <div className={cx('wrapper')}>
             <p className={cx('title')}>{title}</p>

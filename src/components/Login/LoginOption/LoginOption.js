@@ -2,9 +2,9 @@ import classNames from 'classnames/bind';
 import style from './LoginOption.module.scss';
 
 const cx = classNames.bind(style);
-function LoginOption({ Icon, content }) {
+function LoginOption({ Icon, content, onClick }) {
     return (
-        <div className={cx('wrapper')}>
+        <div onClick={onClick} className={cx('wrapper')}>
             <span className={cx('option-icon')}>{Icon}</span>
             <span className={cx('content')}>{content}</span>
         </div>

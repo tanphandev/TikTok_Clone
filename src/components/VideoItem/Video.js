@@ -8,8 +8,8 @@ import { faHeart, faMessage, faShare } from '@fortawesome/free-solid-svg-icons';
 import Interaction from './Interaction';
 import VideoControl from './VideoControl';
 import { useEffect, useRef, useState } from 'react';
-import { videoConfigSelector } from '~/redux-toolkit/videoSelector';
-import { videoConfigSlice } from './videoConfigSlice';
+import { videoConfigSelector } from '~/redux-toolkit/selectors/videoSelector';
+import { videoConfigSlice } from '../../redux-toolkit/Slices/videoConfigSlice';
 
 const cx = classNames.bind(style);
 function Video({ videoData }) {

@@ -1,3 +1,4 @@
+import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRightFromBracket, faEllipsisVertical, faPlus } from '@fortawesome/free-solid-svg-icons';
@@ -22,7 +23,8 @@ import Image from '~/components/Image';
 import style from './Header.module.scss';
 import 'tippy.js/dist/tippy.css';
 import { InboxIcon, MessagesIcon } from '~/assets/icons';
-import LoginModel from '~/modal/LoginModal';
+import { currentUserSelector } from '~/redux-toolkit/selectors/authenticationSelector';
+import AuthModal from '~/modal/AuthModal/AuthModal';
 const cx = classNames.bind(style);
 const MENU_ITEMS = [
     {
@@ -85,8 +87,9 @@ const handleOnchange = (item) => {
 };
 
 function Header() {
-    const [isOpenLoginModal, setIsOpenLoginModal] = useState(false);
-    const currentUser = false;
+    const [isOpenAuthModal, setIsOpenAuthModal] = useState(false);
+    const dispatch = useDispatch();
+    const currentUser = useSelector(currentUserSelector);
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
@@ -116,14 +119,14 @@ function Header() {
                     ) : (
                         <Button
                             onClick={() => {
-                                setIsOpenLoginModal(true);
+                                setIsOpenAuthModal(true);
                             }}
                             primary
                         >
                             Log in
                         </Button>
                     )}
-                    {isOpenLoginModal && <LoginModel closeLoginModal={setIsOpenLoginModal} />}
+                    {!currentUser && isOpenAuthModal && <AuthModal closeAuthModal={setIsOpenAuthModal} />}
                     <Menu items={currentUser ? userMenu : MENU_ITEMS} onChange={handleOnchange}>
                         {currentUser ? (
                             <Image

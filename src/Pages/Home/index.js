@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import VideoItem from '~/components/VideoItem';
 import { getVideo } from '~/services/getVideoService';
-import { videoDataSlice } from '~/components/VideoItem/videoDataSlice';
-import { videoDataAPISelector } from '~/redux-toolkit/videoSelector';
+import { videoDataSlice } from '~/redux-toolkit/Slices/videoDataSlice';
+import { videoDataAPISelector } from '~/redux-toolkit/selectors/videoSelector';
 function Home() {
     const dispatch = useDispatch();
     const [videoData, setVideoData] = useState([]);
