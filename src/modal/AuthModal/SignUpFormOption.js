@@ -8,14 +8,30 @@ import { FacebookIcon, GoogleIcon, UserIcon } from '~/assets/icons';
 import { authForms } from '~/constants/constants';
 
 const cx = classNames.bind(style);
-function SignUpFormOption({ setForm, closeAuthModal }) {
+function SignUpFormOption({ setForm, setIsBackSignUp }) {
     return (
         <div>
             <div className={cx('signup__content')}>
                 <h2 className={cx('signup__title')}>Sign up for TikTok</h2>
-                <LoginOption Icon={<UserIcon width="1.8rem" height="1.8rem" />} content="Use email" />
-                <LoginOption Icon={<FacebookIcon width="1.8rem" height="1.8rem" />} content="Continue with Facebook" />
-                <LoginOption Icon={<GoogleIcon width="1.8rem" height="1.8rem" />} content="Continue with Google" />
+                <LoginOption
+                    setIsBackSignUp={setIsBackSignUp}
+                    onClick={() => {
+                        setForm(authForms.SignUpWithEmail);
+                        setIsBackSignUp(true);
+                    }}
+                    Icon={<UserIcon width="1.8rem" height="1.8rem" />}
+                    content="Use email"
+                />
+                <LoginOption
+                    disable={true}
+                    Icon={<FacebookIcon width="1.8rem" height="1.8rem" />}
+                    content="Continue with Facebook"
+                />
+                <LoginOption
+                    disable={true}
+                    Icon={<GoogleIcon width="1.8rem" height="1.8rem" />}
+                    content="Continue with Google"
+                />
             </div>
             <p className={cx('signup__inform')}>
                 By continuing, you agree to TikTok’s{' '}

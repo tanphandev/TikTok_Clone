@@ -15,26 +15,53 @@ import { authForms } from '~/constants/constants';
 
 const cx = classNames.bind(style);
 
-function LoginFormOption({ closeAuthModal, setIsLogin, setForm, setIsBack }) {
+function LoginFormOption({ setForm, setIsBackLogin, setIsOpenAuthModal }) {
     return (
-        <div>
+        <form>
             <div className={cx('login__content')}>
                 <h2 className={cx('login__title')}>Log in to TikTok</h2>
-                <LoginOption Icon={<QRcodeIcon width="1.8rem" height="1.8rem" />} content="Use QR code" />
                 <LoginOption
+                    disable={true}
+                    Icon={<QRcodeIcon width="1.8rem" height="1.8rem" />}
+                    content="Use QR code"
+                />
+                <LoginOption
+                    setIsBackLogin={setIsBackLogin}
+                    setIsOpenAuthModal={setIsOpenAuthModal}
                     onClick={() => {
                         setForm(authForms.LoginWithEmail);
-                        setIsBack(true);
+                        setIsBackLogin(true);
                     }}
                     Icon={<UserIcon width="1.8rem" height="1.8rem" />}
                     content="Use email / password"
                 />
-                <LoginOption Icon={<FacebookIcon width="1.8rem" height="1.8rem" />} content="Continue with Facebook" />
-                <LoginOption Icon={<GoogleIcon width="1.8rem" height="1.8rem" />} content="Continue with Google" />
-                <LoginOption Icon={<TwitterIcon width="1.8rem" height="1.8rem" />} content="Continue with Twitter" />
-                <LoginOption Icon={<LINEIcon width="1.8rem" height="1.8rem" />} content="Continue with LINE" />
-                <LoginOption Icon={<AppleIcon width="1.8rem" height="1.8rem" />} content="Continue with Apple" />
                 <LoginOption
+                    disable={true}
+                    Icon={<FacebookIcon width="1.8rem" height="1.8rem" />}
+                    content="Continue with Facebook"
+                />
+                <LoginOption
+                    disable={true}
+                    Icon={<GoogleIcon width="1.8rem" height="1.8rem" />}
+                    content="Continue with Google"
+                />
+                <LoginOption
+                    disable={true}
+                    Icon={<TwitterIcon width="1.8rem" height="1.8rem" />}
+                    content="Continue with Twitter"
+                />
+                <LoginOption
+                    disable={true}
+                    Icon={<LINEIcon width="1.8rem" height="1.8rem" />}
+                    content="Continue with LINE"
+                />
+                <LoginOption
+                    disable={true}
+                    Icon={<AppleIcon width="1.8rem" height="1.8rem" />}
+                    content="Continue with Apple"
+                />
+                <LoginOption
+                    disable={true}
                     Icon={<InstagramIcon width="1.8rem" height="1.8rem" />}
                     content="Continue with Instagram"
                 />
@@ -56,7 +83,7 @@ function LoginFormOption({ closeAuthModal, setIsLogin, setForm, setIsBack }) {
                     Sign up
                 </span>
             </p>
-        </div>
+        </form>
     );
 }
 

@@ -1,0 +1,75 @@
+//login/signup mixin
+
+@mixin inputs-wrap {
+    display: flex;
+    flex-direction: column;
+}
+
+@mixin email-password-input {
+    position: relative;
+    margin: 10px 30px;
+}
+
+@mixin email-icon-eye {
+    position: absolute;
+    top: 50%;
+    right: 16px;
+    transform: translateY(-50%);
+}
+@mixin email-forgot-password {
+    font-size: 1.3rem;
+    margin-left: 30px;
+    width: fit-content;
+    &:hover {
+        text-decoration: underline;
+        color: var(--primary-color);
+    }
+}
+@mixin email-primary-button {
+    margin: 40px 30px;
+}
+
+@mixin email-content {
+    margin-top: 25px;
+    overflow-y: auto;
+    user-select: none;
+}
+
+@mixin email-error {
+    font-size: 1.2rem;
+    margin: 0 32px 10px;
+    font-weight: 500;
+    color: red;
+}
+
+@mixin password-error {
+    font-size: 1.2rem;
+    margin: 0 32px 10px;
+    font-weight: 500;
+    color: red;
+}
+
+//alert
+@mixin alert {
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    width: 40vh;
+    height: 40px;
+    font-size: 1.4rem;
+    top: 12px;
+    right: 50%;
+    transform: translate(50%, -54px);
+    z-index: 1;
+    animation: fadeInAlert 0.3s ease-in-out forwards;
+}
+
+@keyframes fadeInAlert {
+    from {
+        opacity: 0;
+    }
+    to {
+        transform: translate(50%, 0);
+        opacity: 1;
+    }
+}

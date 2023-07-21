@@ -1,2 +1,2 @@
 export const authenticationConfigSelector = (state) => state.authenticationConfig;
-export const currentUserSelector = (state) => state.authenticationConfig.currentUser;
+export const iscurrentUserSelector = (state) => state.authenticationConfig.isCurrentUser;

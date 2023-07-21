@@ -1,3 +1,4 @@
+@import 'AuthMixin.scss';
 // authmodal scss
 .wrapper {
     position: fixed;
@@ -15,6 +16,10 @@
     height: 100%;
     background-color: rgba(127, 127, 127, 0.6);
     animation: fadeInOpacity ease-in 0.15s;
+}
+
+.alert {
+    @include alert;
 }
 
 // loginFrom scss
@@ -128,6 +133,7 @@
     user-select: none;
 }
 
+.signup-email__title,
 .login-email__title,
 .signup__title {
     font-size: 3.2rem;
@@ -161,39 +167,38 @@
     }
 }
 
-//login with email
+//login/signUp with email
+.signup-email__inputs-wrap,
 .login-email__inputs-wrap {
-    display: flex;
-    flex-direction: column;
+    @include inputs-wrap;
 }
-
+.signupord-input,
 .password-input {
-    position: relative;
-    margin: 10px 30px;
+    @include email-password-input;
 }
+.signupeye,
 .icon-eye {
-    position: absolute;
-    top: 50%;
-    right: 16px;
-    transform: translateY(-50%);
+    @include email-icon-eye;
 }
+.signupt-password,
 .forgot-password {
-    font-size: 1.3rem;
-    margin-left: 30px;
-    &:hover {
-        text-decoration: underline;
-        color: var(--primary-color);
-    }
+    @include email-forgot-password;
 }
-
+.signup-email__button,
 .login-email__button {
-    margin: 40px 30px;
+    @include email-primary-button;
 }
-
+.signup-email__content,
 .login-email__content {
-    margin-top: 50px;
-    overflow-y: auto;
-    user-select: none;
+    @include email-content;
+}
+.signup-email__email-error,
+.login-email__email-error {
+    @include email-error;
+}
+.signup-email__password-error,
+.login-email__password-error {
+    @include password-error;
 }
 @keyframes fadeInScale {
     from {

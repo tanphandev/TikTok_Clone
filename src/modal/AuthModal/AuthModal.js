@@ -1,20 +1,24 @@
 import classNames from 'classnames/bind';
-import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmark, faArrowLeft, faL } from '@fortawesome/free-solid-svg-icons';
+import { faXmark, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 import style from './AuthModal.module.scss';
-import { useState } from 'react';
 import LoginFormOption from './LoginFormOption';
 import LoginEmailForm from './LoginEmailForm';
 import SignUpFormOption from './SignUpFormOption';
 import SignUpEmailForm from './SignUpEmailForm';
 import { authForms } from '~/constants/constants';
+import { Alert } from '@mui/material';
+import { alertSelector } from '~/redux-toolkit/selectors/alertSelector';
 const cx = classNames.bind(style);
-function AuthModal({ closeAuthModal }) {
+function AuthModal({ setIsOpenAuthModal }) {
     const [form, setForm] = useState(authForms.LoginFormOption);
-    const [isBack, setIsBack] = useState(false);
+    const [isBackLogin, setIsBackLogin] = useState(false);
+    const [isBackSignUp, setIsBackSignUp] = useState(false);
     let FormComp = LoginFormOption;
+    const alert = useSelector(alertSelector);
     switch (form) {
         case authForms.LoginOption:
             FormComp = LoginFormOption;
@@ -35,9 +39,25 @@ function AuthModal({ closeAuthModal }) {
     }
     return (
         <div className={cx('wrapper')}>
+            {alert.isShow && (
+                <Alert
+                    sx={{
+                        fontSize: '1.2rem',
+                        '& .MuiAlert-icon ': {
+                            fontSize: '20px',
+                            marginRight: '6px',
+                        },
+                    }}
+                    className={cx('alert')}
+                    variant={alert.variant}
+                    severity={alert.type}
+                >
+                    {alert.content}
+                </Alert>
+            )}
             <div
                 onClick={() => {
-                    closeAuthModal(false);
+                    setIsOpenAuthModal(false);
                 }}
                 className={cx('overlay')}
             >
@@ -49,17 +69,27 @@ function AuthModal({ closeAuthModal }) {
                 >
                     <div
                         onClick={() => {
-                            closeAuthModal(false);
+                            setIsOpenAuthModal(false);
                         }}
                         className={cx('icon-x-wrap')}
                     >
                         <FontAwesomeIcon className={cx('close-icon')} icon={faXmark} />
                     </div>
-                    {isBack && (
+                    {isBackLogin && (
                         <FontAwesomeIcon
                             onClick={() => {
                                 setForm(authForms.LoginOption);
-                                setIsBack(false);
+                                setIsBackLogin(false);
+                            }}
+                            className={cx('back-icon')}
+                            icon={faArrowLeft}
+                        />
+                    )}
+                    {isBackSignUp && (
+                        <FontAwesomeIcon
+                            onClick={() => {
+                                setForm(authForms.SignUpOption);
+                                setIsBackSignUp(false);
                             }}
                             className={cx('back-icon')}
                             icon={faArrowLeft}
@@ -69,9 +99,10 @@ function AuthModal({ closeAuthModal }) {
                     {
                         <FormComp
                             data={'DATA of LOGIN WITH EMAIL'}
-                            closeAuthModal={closeAuthModal}
+                            setIsOpenAuthModal={setIsOpenAuthModal}
                             setForm={setForm}
-                            setIsBack={setIsBack}
+                            setIsBackLogin={setIsBackLogin}
+                            setIsBackSignUp={setIsBackSignUp}
                         />
                     }
                 </div>

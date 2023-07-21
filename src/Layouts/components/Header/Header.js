@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRightFromBracket, faEllipsisVertical, faPlus } from '@fortawesome/free-solid-svg-icons';
 import Tippy from '@tippyjs/react';
@@ -23,8 +23,9 @@ import Image from '~/components/Image';
 import style from './Header.module.scss';
 import 'tippy.js/dist/tippy.css';
 import { InboxIcon, MessagesIcon } from '~/assets/icons';
-import { currentUserSelector } from '~/redux-toolkit/selectors/authenticationSelector';
+import { iscurrentUserSelector } from '~/redux-toolkit/selectors/authenticationSelector';
 import AuthModal from '~/modal/AuthModal/AuthModal';
+
 const cx = classNames.bind(style);
 const MENU_ITEMS = [
     {
@@ -88,8 +89,9 @@ const handleOnchange = (item) => {
 
 function Header() {
     const [isOpenAuthModal, setIsOpenAuthModal] = useState(false);
-    const dispatch = useDispatch();
-    const currentUser = useSelector(currentUserSelector);
+    const isCurrentUser = useSelector(iscurrentUserSelector);
+    console.log(isCurrentUser);
+    const items = isCurrentUser ? userMenu : MENU_ITEMS;
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
@@ -103,7 +105,7 @@ function Header() {
                     <Button def iconLeft={<FontAwesomeIcon className={cx('plus-icon')} icon={faPlus} />}>
                         Upload
                     </Button>
-                    {currentUser ? (
+                    {isCurrentUser ? (
                         <>
                             <Tippy content={'Messages'}>
                                 <button className={cx('action-icon')}>
@@ -126,9 +128,9 @@ function Header() {
                             Log in
                         </Button>
                     )}
-                    {!currentUser && isOpenAuthModal && <AuthModal closeAuthModal={setIsOpenAuthModal} />}
-                    <Menu items={currentUser ? userMenu : MENU_ITEMS} onChange={handleOnchange}>
-                        {currentUser ? (
+                    {!isCurrentUser && isOpenAuthModal && <AuthModal setIsOpenAuthModal={setIsOpenAuthModal} />}
+                    <Menu items={items} onChange={handleOnchange}>
+                        {isCurrentUser ? (
                             <Image
                                 className={cx('personal-avatar')}
                                 src="https://scontent.fsgn2-7.fna.fbcdn.net/v/t39.30808-6/319363337_550209283289836_2946999966778887654_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=go30WBeuNbAAX_UG7EM&_nc_ht=scontent.fsgn2-7.fna&oh=00_AfCVh4k1RgN2ftl-Qk0eep5pE-0vcQOx1XDUjYajqIcHcA&oe=641D3A61"
