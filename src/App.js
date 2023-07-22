@@ -1,6 +1,6 @@
 import { Fragment, useEffect } from 'react';
 import { DefaultLayout } from '~/Layouts';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { HashRouter, Route, Routes } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 // eslint-disable-next-line no-unused-vars
 import { publicRoutes, privateRoutes } from '~/Routes';
@@ -23,7 +23,7 @@ function App() {
         checkCurrentUser(token);
     }, []);
     return (
-        <BrowserRouter>
+        <HashRouter>
             <div className="App">
                 <Routes>
                     {publicRoutes.map((route, index) => {
@@ -48,7 +48,7 @@ function App() {
                     })}
                 </Routes>
             </div>
-        </BrowserRouter>
+        </HashRouter>
     );
 }
 
