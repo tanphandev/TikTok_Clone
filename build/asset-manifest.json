@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/static/css/main.9160ed62.css",
-    "main.js": "/static/js/main.e843f1c7.js",
-    "static/js/787.c7aafdec.chunk.js": "/static/js/787.c7aafdec.chunk.js",
-    "static/media/sofiapro-semibold.otf": "/static/media/sofiapro-semibold.a9a8148f7d5d0db20db8.otf",
-    "static/media/sofiapro-bold.woff2": "/static/media/sofiapro-bold.1d7186488612ac20891f.woff2",
-    "static/media/Proxima-Nova-Bold.woff2": "/static/media/Proxima-Nova-Bold.8dd475cbc90552d85f91.woff2",
-    "static/media/Proxima-Nova-Regular.woff2": "/static/media/Proxima-Nova-Regular.6c83037ae28747e6d774.woff2",
-    "static/media/Proxima-Nova-Semibold.woff2": "/static/media/Proxima-Nova-Semibold.c5632e80f6e35c93156f.woff2",
-    "static/media/logo.svg": "/static/media/logo.897235be3798a09f8d9e6a88ca2fbb93.svg",
-    "index.html": "/index.html",
-    "main.9160ed62.css.map": "/static/css/main.9160ed62.css.map",
-    "main.e843f1c7.js.map": "/static/js/main.e843f1c7.js.map",
-    "787.c7aafdec.chunk.js.map": "/static/js/787.c7aafdec.chunk.js.map"
+    "main.css": "/TikTok_Clone/static/css/main.b5ea627e.css",
+    "main.js": "/TikTok_Clone/static/js/main.c0a2c02a.js",
+    "static/js/787.c7aafdec.chunk.js": "/TikTok_Clone/static/js/787.c7aafdec.chunk.js",
+    "static/media/sofiapro-semibold.otf": "/TikTok_Clone/static/media/sofiapro-semibold.a9a8148f7d5d0db20db8.otf",
+    "static/media/sofiapro-bold.woff2": "/TikTok_Clone/static/media/sofiapro-bold.1d7186488612ac20891f.woff2",
+    "static/media/Proxima-Nova-Bold.woff2": "/TikTok_Clone/static/media/Proxima-Nova-Bold.8dd475cbc90552d85f91.woff2",
+    "static/media/Proxima-Nova-Regular.woff2": "/TikTok_Clone/static/media/Proxima-Nova-Regular.6c83037ae28747e6d774.woff2",
+    "static/media/Proxima-Nova-Semibold.woff2": "/TikTok_Clone/static/media/Proxima-Nova-Semibold.c5632e80f6e35c93156f.woff2",
+    "static/media/logo.svg": "/TikTok_Clone/static/media/logo.897235be3798a09f8d9e6a88ca2fbb93.svg",
+    "index.html": "/TikTok_Clone/index.html",
+    "main.b5ea627e.css.map": "/TikTok_Clone/static/css/main.b5ea627e.css.map",
+    "main.c0a2c02a.js.map": "/TikTok_Clone/static/js/main.c0a2c02a.js.map",
+    "787.c7aafdec.chunk.js.map": "/TikTok_Clone/static/js/787.c7aafdec.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.9160ed62.css",
-    "static/js/main.e843f1c7.js"
+    "static/css/main.b5ea627e.css",
+    "static/js/main.c0a2c02a.js"
   ]
 }

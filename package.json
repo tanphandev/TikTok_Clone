@@ -1,7 +1,7 @@
 {
     "name": "tiktok-clone",
     "version": "0.1.0",
-    "homepage": "/",
+    "homepage": "https://tanphandev.github.io/TikTok_Clone",
     "private": true,
     "dependencies": {
         "@emotion/react": "^11.11.1",
