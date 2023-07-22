@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import Tippy from '@tippyjs/react/headless';
 import classNames from 'classnames/bind';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Wrapper as WrapperList } from '~/components/Popper';
 import style from '~/components/Popper/Menu/Menu.module.scss';
 import Header from './Header';
@@ -12,6 +12,9 @@ const defaultFn = () => {};
 function Menu({ children, items, hideOnClick = false, onChange = { defaultFn } }) {
     const [history, setHistory] = useState([{ data: items }]);
     const current = history[history.length - 1];
+    useEffect(() => {
+        setHistory([{ data: items }]);
+    }, [items]);
     const renderItem = () =>
         current.data.map((item, index) => (
             <MenuItem

@@ -90,8 +90,8 @@ const handleOnchange = (item) => {
 function Header() {
     const [isOpenAuthModal, setIsOpenAuthModal] = useState(false);
     const isCurrentUser = useSelector(iscurrentUserSelector);
-    console.log(isCurrentUser);
-    const items = isCurrentUser ? userMenu : MENU_ITEMS;
+    let items = MENU_ITEMS;
+    items = isCurrentUser ? userMenu : MENU_ITEMS;
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
