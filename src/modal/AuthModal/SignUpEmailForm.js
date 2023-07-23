@@ -10,12 +10,10 @@ import { useDispatch } from 'react-redux';
 
 import Button from '~/components/Button';
 import { authForms } from '~/constants/constants';
-import * as AuthService from '~/services/authService';
-import { alertSlice } from '~/redux-toolkit/Slices/alertSlice';
-import { authenticationSlice } from '~/redux-toolkit/Slices/authenticationSlice';
+import { registerUserByEmail } from '~/redux-toolkit/Slices/authenticationSlice';
 
 const cx = classNames.bind(style);
-function SignUpEmailForm({ setForm, setIsBackSignUp, setIsOpenAuthModal }) {
+function SignUpEmailForm({ setForm, setIsBackSignUp }) {
     const [showPassword, setShowPassword] = useState(true);
     const dispatch = useDispatch();
     const formik = useFormik({
@@ -33,30 +31,7 @@ function SignUpEmailForm({ setForm, setIsBackSignUp, setIsOpenAuthModal }) {
     });
 
     const handleRegisterUser = async (email, password, type = 'email') => {
-        const res = await AuthService.registerUser(email, password, type);
-        if (!!res.data) {
-            //register success
-            localStorage.setItem('currentUser', JSON.stringify(res.data));
-            dispatch(alertSlice.actions.setType('success'));
-            dispatch(alertSlice.actions.setVariant('filled'));
-            dispatch(alertSlice.actions.setContent('Register Account Successed'));
-            dispatch(alertSlice.actions.setIsShow(true));
-            setTimeout(() => {
-                dispatch(alertSlice.actions.setIsShow(false));
-                setIsOpenAuthModal(false);
-                localStorage.setItem('token', `${res.meta.token}`);
-                dispatch(authenticationSlice.actions.changeIsCurrentUser(true));
-            }, 3000);
-        } else {
-            //register faild
-            dispatch(alertSlice.actions.setType('error'));
-            dispatch(alertSlice.actions.setVariant('filled'));
-            dispatch(alertSlice.actions.setContent('Account is Exist on System'));
-            dispatch(alertSlice.actions.setIsShow(true));
-            setTimeout(() => {
-                dispatch(alertSlice.actions.setIsShow(false));
-            }, 2000);
-        }
+        dispatch(registerUserByEmail({ email, password, type }));
     };
     return (
         <form onSubmit={formik.handleSubmit}>

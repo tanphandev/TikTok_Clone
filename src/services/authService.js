@@ -10,7 +10,7 @@ export const registerUser = async (email, password, type) => {
         return res.data;
     } catch (error) {
         console.log(error);
-        return { data: '' };
+        return error.message;
     }
 };
 
@@ -22,7 +22,6 @@ export const loginUser = async (email, password) => {
         });
         return res.data;
     } catch (error) {
-        console.log(error);
         return {
             data: '',
             status: 'Login faild',

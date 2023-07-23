@@ -15,7 +15,7 @@ import { authForms } from '~/constants/constants';
 
 const cx = classNames.bind(style);
 
-function LoginFormOption({ setForm, setIsBackLogin, setIsOpenAuthModal }) {
+function LoginFormOption({ setForm, setIsBackLogin }) {
     return (
         <form>
             <div className={cx('login__content')}>
@@ -27,7 +27,6 @@ function LoginFormOption({ setForm, setIsBackLogin, setIsOpenAuthModal }) {
                 />
                 <LoginOption
                     setIsBackLogin={setIsBackLogin}
-                    setIsOpenAuthModal={setIsOpenAuthModal}
                     onClick={() => {
                         setForm(authForms.LoginWithEmail);
                         setIsBackLogin(true);

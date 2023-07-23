@@ -6,20 +6,16 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import * as AuthService from '~/services/authService';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import Button from '~/components/Button';
 import { authForms } from '~/constants/constants';
-import { alertSlice } from '~/redux-toolkit/Slices/alertSlice';
-import { alertSelector } from '~/redux-toolkit/selectors/alertSelector';
-import { authenticationSlice } from '~/redux-toolkit/Slices/authenticationSlice';
+import { loginUserByEmail } from '~/redux-toolkit/Slices/authenticationSlice';
 
 const cx = classNames.bind(style);
-function LoginEmailForm({ setForm, setIsBackLogin, setIsOpenAuthModal }) {
+function LoginEmailForm({ setForm, setIsBackLogin }) {
     const [showPassword, setShowPassword] = useState(true);
     const dispatch = useDispatch();
-    const alert = useSelector(alertSelector);
     const formik = useFormik({
         initialValues: {
             email: '',
@@ -35,28 +31,7 @@ function LoginEmailForm({ setForm, setIsBackLogin, setIsOpenAuthModal }) {
     });
 
     const handleLogin = async (email, password) => {
-        const res = await AuthService.loginUser(email, password);
-        if (res.data) {
-            localStorage.setItem('token', `${res.meta.token}`);
-            localStorage.setItem('currentUser', JSON.stringify(res.data));
-            dispatch(alertSlice.actions.setType('success'));
-            dispatch(alertSlice.actions.setVariant('filled'));
-            dispatch(alertSlice.actions.setContent('Login Success'));
-            dispatch(alertSlice.actions.setIsShow(true));
-            setTimeout(() => {
-                dispatch(authenticationSlice.actions.changeIsCurrentUser(true));
-                setIsOpenAuthModal(false);
-                dispatch(alertSlice.actions.setIsShow(false));
-            }, 1000);
-        } else {
-            dispatch(alertSlice.actions.setType('error'));
-            dispatch(alertSlice.actions.setVariant('filled'));
-            dispatch(alertSlice.actions.setContent('Login faild, try again!'));
-            dispatch(alertSlice.actions.setIsShow(true));
-            setTimeout(() => {
-                dispatch(alertSlice.actions.setIsShow(false));
-            }, 2000);
-        }
+        dispatch(loginUserByEmail({ email, password }));
     };
     return (
         <form onSubmit={formik.handleSubmit}>

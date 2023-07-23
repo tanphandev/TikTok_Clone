@@ -23,8 +23,9 @@ import Image from '~/components/Image';
 import style from './Header.module.scss';
 import 'tippy.js/dist/tippy.css';
 import { InboxIcon, MessagesIcon } from '~/assets/icons';
-import { iscurrentUserSelector } from '~/redux-toolkit/selectors/authenticationSelector';
+import { isOpenAuthModalSelector, iscurrentUserSelector } from '~/redux-toolkit/selectors/authenticationSelector';
 import AuthModal from '~/modal/AuthModal/AuthModal';
+import authenticationSlice from '~/redux-toolkit/Slices/authenticationSlice';
 
 const cx = classNames.bind(style);
 const MENU_ITEMS = [
@@ -88,8 +89,11 @@ const handleOnchange = (item) => {
 };
 
 function Header() {
-    const [isOpenAuthModal, setIsOpenAuthModal] = useState(false);
+    // const [isOpenAuthModal, setIsOpenAuthModal] = useState(false);
+    const dispatch = useDispatch();
     const isCurrentUser = useSelector(iscurrentUserSelector);
+    const isOpenAuthModal = useSelector(isOpenAuthModalSelector);
+    console.log(isOpenAuthModal);
     let items = MENU_ITEMS;
     items = isCurrentUser ? userMenu : MENU_ITEMS;
     return (
@@ -121,14 +125,14 @@ function Header() {
                     ) : (
                         <Button
                             onClick={() => {
-                                setIsOpenAuthModal(true);
+                                dispatch(authenticationSlice.actions.changeIsOpenModal(true));
                             }}
                             primary
                         >
                             Log in
                         </Button>
                     )}
-                    {!isCurrentUser && isOpenAuthModal && <AuthModal setIsOpenAuthModal={setIsOpenAuthModal} />}
+                    {isOpenAuthModal && <AuthModal />}
                     <Menu items={items} onChange={handleOnchange}>
                         {isCurrentUser ? (
                             <Image

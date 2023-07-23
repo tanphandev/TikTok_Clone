@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
@@ -10,15 +10,16 @@ import LoginEmailForm from './LoginEmailForm';
 import SignUpFormOption from './SignUpFormOption';
 import SignUpEmailForm from './SignUpEmailForm';
 import { authForms } from '~/constants/constants';
-import { Alert } from '@mui/material';
-import { alertSelector } from '~/redux-toolkit/selectors/alertSelector';
+import { isOpenAuthModalSelector } from '~/redux-toolkit/selectors/authenticationSelector';
+import authenticationSlice from '~/redux-toolkit/Slices/authenticationSlice';
 const cx = classNames.bind(style);
-function AuthModal({ setIsOpenAuthModal }) {
+function AuthModal() {
     const [form, setForm] = useState(authForms.LoginFormOption);
     const [isBackLogin, setIsBackLogin] = useState(false);
     const [isBackSignUp, setIsBackSignUp] = useState(false);
+    const dispatch = useDispatch();
+    const isOpenAuthModal = useSelector(isOpenAuthModalSelector);
     let FormComp = LoginFormOption;
-    const alert = useSelector(alertSelector);
     switch (form) {
         case authForms.LoginOption:
             FormComp = LoginFormOption;
@@ -39,25 +40,9 @@ function AuthModal({ setIsOpenAuthModal }) {
     }
     return (
         <div className={cx('wrapper')}>
-            {alert.isShow && (
-                <Alert
-                    sx={{
-                        fontSize: '1.2rem',
-                        '& .MuiAlert-icon ': {
-                            fontSize: '20px',
-                            marginRight: '6px',
-                        },
-                    }}
-                    className={cx('alert')}
-                    variant={alert.variant}
-                    severity={alert.type}
-                >
-                    {alert.content}
-                </Alert>
-            )}
             <div
                 onClick={() => {
-                    setIsOpenAuthModal(false);
+                    dispatch(authenticationSlice.actions.changeIsOpenModal(false));
                 }}
                 className={cx('overlay')}
             >
@@ -69,7 +54,7 @@ function AuthModal({ setIsOpenAuthModal }) {
                 >
                     <div
                         onClick={() => {
-                            setIsOpenAuthModal(false);
+                            dispatch(authenticationSlice.actions.changeIsOpenModal(false));
                         }}
                         className={cx('icon-x-wrap')}
                     >
@@ -99,7 +84,6 @@ function AuthModal({ setIsOpenAuthModal }) {
                     {
                         <FormComp
                             data={'DATA of LOGIN WITH EMAIL'}
-                            setIsOpenAuthModal={setIsOpenAuthModal}
                             setForm={setForm}
                             setIsBackLogin={setIsBackLogin}
                             setIsBackSignUp={setIsBackSignUp}
