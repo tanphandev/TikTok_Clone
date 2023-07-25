@@ -1,17 +1,23 @@
 import React from 'react';
+import { ThemeProvider, createTheme } from '@mui/material';
 import ReactDOM from 'react-dom/client';
 import GlobalStyles from '~/components/GlobalStyles';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import { store } from './redux-toolkit/store';
+import { dark } from '@mui/material/styles/createPalette';
 
+const theme = createTheme({});
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     // <React.StrictMode>
+
     <GlobalStyles>
         <Provider store={store}>
-            <App />
+            <ThemeProvider theme={theme}>
+                <App />
+            </ThemeProvider>
         </Provider>
     </GlobalStyles>,
     // </React.StrictMode>,

@@ -88,3 +88,11 @@
         background: rgba(22, 24, 35, 0.06);
     }
 }
+
+/* responsive */
+/* Tablet and Mobile */
+@media (max-width: 1023px) {
+    .search {
+        display: none;
+    }
+}

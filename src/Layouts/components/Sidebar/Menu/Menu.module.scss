@@ -37,3 +37,27 @@
         }
     }
 }
+
+/* responsive */
+/* Tablet and Mobile */
+@media (max-width: 1023px) {
+    .menu {
+        padding-right: 8px;
+    }
+    .item {
+        margin-left: 0 !important;
+    }
+}
+
+/* Tablet */
+@media (min-width: 740px) and (max-width: 1023px) {
+    .title {
+        display: none;
+    }
+}
+/* Mobile */
+@media (max-width: 739px) {
+    .title {
+        display: none;
+    }
+}
