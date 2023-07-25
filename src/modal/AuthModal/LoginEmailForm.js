@@ -10,7 +10,7 @@ import { useDispatch } from 'react-redux';
 
 import Button from '~/components/Button';
 import { authForms } from '~/constants/constants';
-import { loginUserByEmail } from '~/redux-toolkit/Slices/authenticationSlice';
+import authenticationSlice, { loginUserByEmail } from '~/redux-toolkit/Slices/authenticationSlice';
 
 const cx = classNames.bind(style);
 function LoginEmailForm({ setForm, setIsBackLogin }) {

@@ -1,9 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRightFromBracket, faEllipsisVertical, faPlus } from '@fortawesome/free-solid-svg-icons';
 import Tippy from '@tippyjs/react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import classNames from 'classnames/bind';
 import {
     faCopyright,
@@ -79,23 +78,33 @@ const userMenu = [
     {
         icon: <FontAwesomeIcon icon={faArrowRightFromBracket} />,
         title: 'Log out',
-        to: '/logout',
+        // to: '/logout',
         sperate: true,
     },
 ];
-// handle Logic
-const handleOnchange = (item) => {
-    console.log(item);
-};
 
 function Header() {
     // const [isOpenAuthModal, setIsOpenAuthModal] = useState(false);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const isCurrentUser = useSelector(iscurrentUserSelector);
     const isOpenAuthModal = useSelector(isOpenAuthModalSelector);
-    console.log(isOpenAuthModal);
     let items = MENU_ITEMS;
     items = isCurrentUser ? userMenu : MENU_ITEMS;
+    // handle Logic
+    const handleOnchange = (item) => {
+        switch (item.title) {
+            case 'Log out': {
+                localStorage.removeItem('currentUser');
+                localStorage.removeItem('token');
+                dispatch(authenticationSlice.actions.changeIsCurrentUser(false));
+                navigate('/');
+                break;
+            }
+            default: {
+            }
+        }
+    };
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>

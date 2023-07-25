@@ -6,6 +6,7 @@ import { Wrapper as WrapperList } from '~/components/Popper';
 import style from '~/components/Popper/Menu/Menu.module.scss';
 import Header from './Header';
 import MenuItem from './MenuItem';
+
 const cx = classNames.bind(style);
 
 const defaultFn = () => {};

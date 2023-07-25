@@ -1,6 +1,6 @@
 import { Fragment, useEffect } from 'react';
 import { DefaultLayout } from '~/Layouts';
-import { HashRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, HashRouter, Route, Routes } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -25,19 +25,9 @@ function App() {
         checkCurrentUser(token);
     }, []);
     return (
-        <HashRouter>
+        <BrowserRouter>
             <div className="App">
-                <ToastContainer
-                    position="top-center"
-                    hideProgressBar={false}
-                    newestOnTop={false}
-                    closeOnClick
-                    rtl={false}
-                    pauseOnFocusLoss
-                    draggable
-                    pauseOnHover
-                    theme="colored"
-                />
+                <ToastContainer style={{ fontSize: '1.4rem' }} position="top-center" autoClose={3000} />
                 <Routes>
                     {publicRoutes.map((route, index) => {
                         const Page = route.component;
@@ -61,7 +51,7 @@ function App() {
                     })}
                 </Routes>
             </div>
-        </HashRouter>
+        </BrowserRouter>
     );
 }
 

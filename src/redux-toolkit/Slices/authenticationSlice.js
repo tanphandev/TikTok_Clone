@@ -1,3 +1,4 @@
+import { fas } from '@fortawesome/free-solid-svg-icons';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 import API from '~/API';
@@ -30,7 +31,6 @@ const authenticationSlice = createSlice({
                 state.isLoading = false;
                 state.isSuccess = false;
                 state.errorMessage = action.payload;
-                toast.error('The account registration failed', { theme: 'colored', autoClose: 2000 });
             })
             .addCase(registerUserByEmail.fulfilled, (state, action) => {
                 state.isLoading = false;
@@ -38,8 +38,6 @@ const authenticationSlice = createSlice({
                 state.isCurrentUser = true;
                 localStorage.setItem('currentUser', JSON.stringify(action.payload.data));
                 localStorage.setItem('token', `${action.payload.meta.token}`);
-                toast.success('Register account was successfull', { theme: 'colored', autoClose: 2000 });
-                state.isOpenModal = false;
             })
             .addCase(loginUserByEmail.pending, (state, action) => {
                 state.apiName = 'loginUserByEmail';
@@ -49,8 +47,6 @@ const authenticationSlice = createSlice({
                 state.isLoading = false;
                 state.isSuccess = false;
                 state.errorMessage = action.payload;
-                toast.error('Login is failded', { theme: 'colored', autoClose: 2000 });
-                state.isOpenModal = false;
             })
             .addCase(loginUserByEmail.fulfilled, (state, action) => {
                 state.isLoading = false;
@@ -58,8 +54,6 @@ const authenticationSlice = createSlice({
                 state.isCurrentUser = true;
                 localStorage.setItem('currentUser', JSON.stringify(action.payload.data));
                 localStorage.setItem('token', `${action.payload.meta.token}`);
-                toast.success('Login is successfull', { theme: 'colored', autoClose: 2000 });
-                state.isOpenModal = false;
             });
     },
 });
@@ -68,15 +62,20 @@ export default authenticationSlice;
 
 export const registerUserByEmail = createAsyncThunk(
     'authentication/registerUserByEmail',
-    async ({ email, password, type }, { rejectWithValue }) => {
+    async ({ email, password, type }, { rejectWithValue, dispatch }) => {
         try {
             const res = await httpRequest.post(API.registerUserByEmail, {
                 email,
                 password,
                 type,
             });
+            toast.success('Register account was successfull', { theme: 'colored', autoClose: 500 });
+            setTimeout(() => {
+                dispatch(authenticationSlice.actions.changeIsOpenModal(false));
+            }, 1100);
             return res.data;
         } catch (error) {
+            toast.error('The account registration failed', { theme: 'colored', autoClose: 2000 });
             return rejectWithValue(error.message);
         }
     },
@@ -84,14 +83,19 @@ export const registerUserByEmail = createAsyncThunk(
 
 export const loginUserByEmail = createAsyncThunk(
     'authentication/loginUser',
-    async ({ email, password }, { rejectWithValue }) => {
+    async ({ email, password }, { rejectWithValue, dispatch }) => {
         try {
             const res = await httpRequest.post(API.loginUserByEmail, {
                 email,
                 password,
             });
+            toast.success('Login is successfull', { theme: 'colored', autoClose: 500 });
+            setTimeout(() => {
+                dispatch(authenticationSlice.actions.changeIsOpenModal(false));
+            }, 1100);
             return res.data;
         } catch (error) {
+            toast.error('Login is failded', { theme: 'colored', autoClose: 2000 });
             return rejectWithValue(error.message);
         }
     },
