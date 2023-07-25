@@ -1,29 +1,18 @@
 import { Fragment, useEffect } from 'react';
 import { DefaultLayout } from '~/Layouts';
-import { BrowserRouter, HashRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 // eslint-disable-next-line no-unused-vars
 import { publicRoutes, privateRoutes } from '~/Routes';
-import authenticationSlice from './redux-toolkit/Slices/authenticationSlice';
-import * as AuthService from '~/services/authService';
+import { checkCurrentUser } from './redux-toolkit/Slices/authenticationSlice';
 function App() {
     const dispatch = useDispatch();
     useEffect(() => {
         const token = localStorage.getItem('token');
-        const checkCurrentUser = async (token) => {
-            const res = await AuthService.getProfile(token);
-            if (!!res.data) {
-                dispatch(authenticationSlice.actions.changeIsCurrentUser(true));
-            } else {
-                dispatch(authenticationSlice.actions.changeIsCurrentUser(false));
-                localStorage.removeItem('token');
-                localStorage.removeItem('currentUser');
-            }
-        };
-        checkCurrentUser(token);
-    }, []);
+        dispatch(checkCurrentUser({ token }));
+    }, [dispatch]);
     return (
         <BrowserRouter>
             <div className="App">
