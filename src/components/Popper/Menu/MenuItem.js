@@ -7,7 +7,7 @@ function MenuItem({ data, onClick }) {
         sperate: data.sperate,
     });
     return (
-        <Button className={classes} iconLeft={data.icon} to={data.to} onClick={onClick}>
+        <Button className={classes} iconRight={data.iconRight} iconLeft={data.icon} to={data.to} onClick={onClick}>
             {data.title}{' '}
         </Button>
     );

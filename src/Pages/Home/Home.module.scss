@@ -1,0 +1,17 @@
+.containter {
+    width: 700px;
+    margin-left: 200px;
+}
+
+/* Tablet */
+@media (min-width: 740px) and (max-width: 1023px) {
+    .containter {
+        margin-left: 24px;
+    }
+}
+/*mobile*/
+@media (max-width: 739px) {
+    .containter {
+        margin-left: 0;
+    }
+}

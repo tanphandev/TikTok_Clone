@@ -22,7 +22,7 @@
     }
 
     input:not(:placeholder-shown) ~ .search-btn {
-        color: rgba(22, 24, 35, 0.75);
+        color: rgba(22, 24, 35, 0.75) !important;
     }
     &:focus-within {
         border-color: rgba(22, 24, 35, 0.2);
@@ -82,7 +82,6 @@
         transform: translateY(-50%);
         width: 1px;
         height: var(--element-after-search-btn-height);
-        background-color: rgba(37, 40, 56, 0.34);
     }
     &:active {
         background: rgba(22, 24, 35, 0.06);

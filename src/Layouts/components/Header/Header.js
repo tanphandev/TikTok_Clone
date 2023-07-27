@@ -17,7 +17,6 @@ import Button from '~/components/Button';
 import Menu from '~/components/Popper/Menu';
 import Search from '../Search';
 import config from '~/configs';
-import images from '~/assets/images';
 import Image from '~/components/Image';
 import style from './Header.module.scss';
 import 'tippy.js/dist/tippy.css';
@@ -25,75 +24,101 @@ import { InboxIcon, MessagesIcon } from '~/assets/icons';
 import { isOpenAuthModalSelector, iscurrentUserSelector } from '~/redux-toolkit/selectors/authenticationSelector';
 import AuthModal from '~/modal/AuthModal/AuthModal';
 import authenticationSlice from '~/redux-toolkit/Slices/authenticationSlice';
+import { Logo } from '~/assets/icons/logo';
+import { useTheme } from '@emotion/react';
+import { DarkMode } from '@mui/icons-material';
+import { modeSelector } from '~/redux-toolkit/selectors/themeSelector';
+import { useEffect, useRef } from 'react';
+import themeSlice from '~/redux-toolkit/Slices/themeSlice';
+import DarkModeSwitch from '~/components/DarkModeSwitch';
 
 const cx = classNames.bind(style);
-const MENU_ITEMS = [
-    {
-        icon: <FontAwesomeIcon icon={faCopyright} />,
-        title: 'English',
-        children: {
-            title: 'Language',
-            data: [
-                {
-                    type: 'Language',
-                    code: 'en',
-                    title: 'English',
-                },
-                {
-                    type: 'Language',
-                    code: 'vi',
-                    title: 'Tiếng Anh',
-                },
-            ],
-        },
-    },
-    {
-        icon: <FontAwesomeIcon icon={faQuestionCircle} />,
-        title: 'Feedback and help',
-        to: '/feedback',
-    },
-    {
-        icon: <FontAwesomeIcon icon={faKeyboard} />,
-        title: 'Keyboard shortcuts',
-    },
-];
-
-const userMenu = [
-    {
-        icon: <FontAwesomeIcon icon={faUser} />,
-        title: 'View profile',
-        to: '/@ngoc31',
-    },
-    {
-        icon: <FontAwesomeIcon icon={faPaperPlane} />,
-        title: 'LIVE studio',
-        to: '/live',
-    },
-    {
-        icon: <FontAwesomeIcon icon={faSun} />,
-        title: 'Settings',
-        to: '/settings',
-    },
-    ...MENU_ITEMS,
-    {
-        icon: <FontAwesomeIcon icon={faArrowRightFromBracket} />,
-        title: 'Log out',
-        // to: '/logout',
-        sperate: true,
-    },
-];
-
 function Header() {
-    // const [isOpenAuthModal, setIsOpenAuthModal] = useState(false);
+    const theme = useTheme();
+    const backgroundColor = theme.palette.background.default;
+    const logoColor = theme.palette.logo.main;
+    const mode = useSelector(modeSelector);
+    let isDarkMode = useRef(false);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const isCurrentUser = useSelector(iscurrentUserSelector);
     const isOpenAuthModal = useSelector(isOpenAuthModalSelector);
+    const MENU_ITEMS = [
+        {
+            icon: <FontAwesomeIcon icon={faCopyright} />,
+            title: 'English',
+            children: {
+                title: 'Language',
+                data: [
+                    {
+                        type: 'Language',
+                        code: 'en',
+                        title: 'English',
+                    },
+                    {
+                        type: 'Language',
+                        code: 'vi',
+                        title: 'Tiếng Anh',
+                    },
+                ],
+            },
+        },
+        {
+            icon: <FontAwesomeIcon icon={faQuestionCircle} />,
+            title: 'Feedback and help',
+            to: '/feedback',
+        },
+        {
+            icon: <FontAwesomeIcon icon={faKeyboard} />,
+            title: 'Keyboard shortcuts',
+        },
+        {
+            icon: <DarkMode />,
+            title: 'Dark mode',
+            iconRight: <DarkModeSwitch checked={isDarkMode.current} />,
+        },
+    ];
+
+    const userMenu = [
+        {
+            icon: <FontAwesomeIcon icon={faUser} />,
+            title: 'View profile',
+            to: '/@ngoc31',
+        },
+        {
+            icon: <FontAwesomeIcon icon={faPaperPlane} />,
+            title: 'LIVE studio',
+            to: '/live',
+        },
+        {
+            icon: <FontAwesomeIcon icon={faSun} />,
+            title: 'Settings',
+            to: '/settings',
+        },
+        ...MENU_ITEMS,
+        {
+            icon: <FontAwesomeIcon icon={faArrowRightFromBracket} />,
+            title: 'Log out',
+            // to: '/logout',
+            sperate: true,
+        },
+    ];
     let items = MENU_ITEMS;
     items = isCurrentUser ? userMenu : MENU_ITEMS;
+    // check Mode
+    useEffect(() => {
+        isDarkMode.current = mode === 'dark' ? true : false;
+    }, [mode]);
+    console.log(mode);
+    console.log(isDarkMode.current);
     // handle Logic
     const handleOnchange = (item) => {
         switch (item.title) {
+            case 'Dark mode': {
+                dispatch(themeSlice.actions.toggleMode());
+
+                break;
+            }
             case 'Log out': {
                 localStorage.removeItem('currentUser');
                 localStorage.removeItem('token');
@@ -106,27 +131,50 @@ function Header() {
         }
     };
     return (
-        <header className={cx('wrapper')}>
+        <header style={{ backgroundColor: backgroundColor }} className={cx('wrapper')}>
             <div className={cx('inner')}>
                 <Link to={config.routes.home} className={cx('logo')}>
-                    <img src={images.logo} alt="TikTok" />
+                    {<Logo modeColor={logoColor} />}
                 </Link>
 
                 <Search />
 
                 <div className={cx('action')}>
-                    <Button def iconLeft={<FontAwesomeIcon className={cx('plus-icon')} icon={faPlus} />}>
+                    <Button
+                        style={{
+                            backgroundColor: theme.palette.headerButton.main,
+                            color: theme.palette.textColor.main,
+                        }}
+                        def
+                        iconLeft={
+                            <FontAwesomeIcon
+                                color={theme.palette.textColor.main}
+                                className={cx('plus-icon')}
+                                icon={faPlus}
+                            />
+                        }
+                    >
                         Upload
                     </Button>
                     {isCurrentUser ? (
                         <>
                             <Tippy content={'Messages'}>
-                                <button className={cx('action-icon')}>
+                                <button
+                                    style={{
+                                        color: theme.palette.textColor.main,
+                                    }}
+                                    className={cx('action-icon')}
+                                >
                                     <MessagesIcon className={cx('messages-icon')} />
                                 </button>
                             </Tippy>
                             <Tippy content={'Inbox'}>
-                                <button className={cx('action-icon')}>
+                                <button
+                                    style={{
+                                        color: theme.palette.textColor.main,
+                                    }}
+                                    className={cx('action-icon')}
+                                >
                                     <InboxIcon className={cx('inbox-icon')} />
                                 </button>
                             </Tippy>
@@ -151,7 +199,7 @@ function Header() {
                                 fallBack="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSegCgK5aWTTuv_K5TPd10DcJxphcBTBct6R170EamgcCOcYs7LGKVy7ybRc-MCwOcHljg&usqp=CAU"
                             />
                         ) : (
-                            <button className={cx('more-btn')}>
+                            <button style={{ color: theme.palette.textColor.main }} className={cx('more-btn')}>
                                 <FontAwesomeIcon icon={faEllipsisVertical} />
                             </button>
                         )}

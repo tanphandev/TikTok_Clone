@@ -11,7 +11,7 @@ import ImageComp from '~/components/Image';
 const cx = classNames.bind(style);
 function AccountItem({ image, name, nickName, check, isPreview, followersCount, likesCount }) {
     const renderPreview = (props) => (
-        <div className="preview" tabIndex="-1" {...props}>
+        <div className={cx('preview')} tabIndex="-1" {...props}>
             <AccountPreview
                 image={image}
                 name={name}
