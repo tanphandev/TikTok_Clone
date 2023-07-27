@@ -131,7 +131,10 @@ function Header() {
         }
     };
     return (
-        <header style={{ backgroundColor: backgroundColor }} className={cx('wrapper')}>
+        <header
+            style={{ backgroundColor: backgroundColor, boxShadow: theme.palette.headerBoxShadow.main }}
+            className={cx('wrapper')}
+        >
             <div className={cx('inner')}>
                 <Link to={config.routes.home} className={cx('logo')}>
                     {<Logo modeColor={logoColor} />}

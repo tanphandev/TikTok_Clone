@@ -112,7 +112,7 @@ function Search() {
                             backgroundColor: 'transparent',
                             color: theme.palette.headerClear.main,
                             '&::after': {
-                                backgroundColor: theme.palette.searchDevider.main,
+                                backgroundColor: theme.palette.devider.main,
                             },
                         }}
                         className={cx('search-btn')}

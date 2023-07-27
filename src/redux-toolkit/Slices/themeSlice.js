@@ -3,7 +3,7 @@ const { createSlice } = require('@reduxjs/toolkit');
 const themeSlice = createSlice({
     name: 'theme',
     initialState: {
-        mode: 'dark',
+        mode: 'light',
     },
     reducers: {
         toggleMode: (state, action) => {

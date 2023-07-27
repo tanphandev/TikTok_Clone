@@ -1,5 +1,5 @@
 import TippyHeadless from '@tippyjs/react/headless';
-/* eslint-disable jsx-a11y/img-redundant-alt */
+import { useTheme } from '@mui/material';
 import AccountPreview from './AccountPreview/';
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -10,6 +10,7 @@ import ImageComp from '~/components/Image';
 
 const cx = classNames.bind(style);
 function AccountItem({ image, name, nickName, check, isPreview, followersCount, likesCount }) {
+    const theme = useTheme();
     const renderPreview = (props) => (
         <div className={cx('preview')} tabIndex="-1" {...props}>
             <AccountPreview
@@ -27,7 +28,7 @@ function AccountItem({ image, name, nickName, check, isPreview, followersCount, 
             <TippyHeadless render={isPreview ? renderPreview : () => {}} interactive delay={[900, 0]}>
                 <div className={cx('account-item')}>
                     <ImageComp className={cx('account-picture')} src={image} alt="account-picture" />
-                    <div className={cx('account-info')}>
+                    <div style={{ color: theme.palette.textColor.main }} className={cx('account-info')}>
                         <h4 className={cx('nickname')}>
                             {nickName}
                             {check && <FontAwesomeIcon className={cx('icon')} icon={faCheckCircle} />}

@@ -1,14 +1,15 @@
 import classNames from 'classnames/bind';
+import { useTheme } from '@mui/material';
 
 import AccountItem from './AccountItem';
 import { useEffect, useState } from 'react';
-
 import style from './SuggestAccounts.module.scss';
 import { getUserSuggested } from '~/services/userService';
 
 const cx = classNames.bind(style);
 
 function SuggestAccount({ title, isPreviewAccount }) {
+    const theme = useTheme();
     const [userSuggested, setUserSuggested] = useState([]);
     const [page, setPage] = useState(1);
     const [extendUser, setExtendUser] = useState(false);
@@ -28,8 +29,10 @@ function SuggestAccount({ title, isPreviewAccount }) {
         fetchAPI();
     }, [page]);
     return (
-        <div className={cx('wrapper')}>
-            <p className={cx('title')}>{title}</p>
+        <div style={{ borderTop: `1px solid ${theme.palette.devider.main}` }} className={cx('wrapper')}>
+            <p style={{ color: theme.palette.textColor.secondary }} className={cx('title')}>
+                {title}
+            </p>
             {userSuggested.map((user, index) => (
                 <AccountItem
                     image={user.avatar}

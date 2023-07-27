@@ -37,10 +37,13 @@ export const themeSettings = (mode) => {
                       headerButton: {
                           main: colorTokens.grey[700],
                       },
+                      headerBoxShadow: {
+                          main: '#ffffff0f 0px 2px 8px',
+                      },
                       headerSearch: {
                           main: colorTokens.grey[700],
                       },
-                      searchDevider: {
+                      devider: {
                           main: colorTokens.grey[600],
                       },
                       headerClear: {
@@ -48,6 +51,14 @@ export const themeSettings = (mode) => {
                       },
                       textColor: {
                           main: colorTokens.grey[0],
+                          secondary: colorTokens.grey[200],
+                      },
+                      scrollColor: {
+                          thumb: colorTokens.grey[600],
+                          track: colorTokens.grey[1000],
+                      },
+                      tippyColor: {
+                          main: colorTokens.grey[700],
                       },
                       background: {
                           default: colorTokens.grey[900],
@@ -61,10 +72,13 @@ export const themeSettings = (mode) => {
                       headerButton: {
                           main: colorTokens.grey[0],
                       },
+                      headerBoxShadow: {
+                          main: '#0000000f 0px 2px 8px',
+                      },
                       headerSearch: {
                           main: colorTokens.grey[50],
                       },
-                      searchDevider: {
+                      devider: {
                           main: colorTokens.grey[200],
                       },
                       headerClear: {
@@ -72,6 +86,14 @@ export const themeSettings = (mode) => {
                       },
                       textColor: {
                           main: colorTokens.grey[1000],
+                          secondary: colorTokens.grey[600],
+                      },
+                      scrollColor: {
+                          thumb: colorTokens.grey[50],
+                          track: colorTokens.grey[0],
+                      },
+                      tippyColor: {
+                          main: colorTokens.grey[0],
                       },
                       background: {
                           default: colorTokens.grey[0],
