@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
 import { useFormik } from 'formik';
+import { useTheme } from '@mui/styles';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 
@@ -16,6 +17,7 @@ const cx = classNames.bind(style);
 function SignUpEmailForm({ setForm, setIsBackSignUp }) {
     const [showPassword, setShowPassword] = useState(true);
     const dispatch = useDispatch();
+    const theme = useTheme();
     const formik = useFormik({
         initialValues: {
             email: '',
@@ -36,7 +38,9 @@ function SignUpEmailForm({ setForm, setIsBackSignUp }) {
     return (
         <form onSubmit={formik.handleSubmit}>
             <div className={cx('signup-email__content')}>
-                <h2 className={cx('signup-email__title')}>Sign Up With Email</h2>
+                <h2 style={{ color: theme.palette.textColor.main }} className={cx('signup-email__title')}>
+                    Sign Up With Email
+                </h2>
                 <div className={cx('signup-email__inputs-wrap')}>
                     <TextField
                         InputProps={{
@@ -84,12 +88,15 @@ function SignUpEmailForm({ setForm, setIsBackSignUp }) {
                         Sign Up
                     </Button>
                 </div>
-                <p className={cx('signup__inform')}>
+                <p style={{ color: theme.palette.textColor.third }} className={cx('signup__inform')}>
                     By continuing, you agree to TikTok’s{' '}
-                    <span style={{ fontWeight: '600', color: '#444' }}>Terms of Service</span> and confirm that you have
-                    read TikTok’s <span style={{ fontWeight: '600', color: '#444' }}>Privacy Policy</span>.
+                    <span style={{ fontWeight: '600', color: theme.palette.textColor.secondary }}>
+                        Terms of Service
+                    </span>{' '}
+                    and confirm that you have read TikTok’s{' '}
+                    <span style={{ fontWeight: '600', color: theme.palette.textColor.secondary }}>Privacy Policy</span>.
                 </p>
-                <p className={cx('signup__inform--signup')}>
+                <p style={{ color: theme.palette.textColor.main }} className={cx('signup__inform--signup')}>
                     Already have an account?
                     <span
                         onClick={() => {

@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useMemo } from 'react';
 import { DefaultLayout } from '~/Layouts';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { HashRouter, Route, Routes } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { ThemeProvider, createTheme } from '@mui/material';
 import { ToastContainer } from 'react-toastify';
@@ -19,7 +19,7 @@ function App() {
         dispatch(checkCurrentUser({ token }));
     }, [dispatch]);
     return (
-        <BrowserRouter>
+        <HashRouter>
             <ThemeProvider theme={theme}>
                 <div className="App">
                     <ToastContainer style={{ fontSize: '1.4rem' }} position="top-center" autoClose={3000} />
@@ -47,7 +47,7 @@ function App() {
                     </Routes>
                 </div>
             </ThemeProvider>
-        </BrowserRouter>
+        </HashRouter>
     );
 }
 

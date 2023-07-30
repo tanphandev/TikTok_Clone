@@ -1,5 +1,6 @@
 import classNames from 'classnames/bind';
 import style from './AuthModal.module.scss';
+import { useTheme } from '@mui/styles';
 import { TextField } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
@@ -10,12 +11,13 @@ import { useDispatch } from 'react-redux';
 
 import Button from '~/components/Button';
 import { authForms } from '~/constants/constants';
-import authenticationSlice, { loginUserByEmail } from '~/redux-toolkit/Slices/authenticationSlice';
+import { loginUserByEmail } from '~/redux-toolkit/Slices/authenticationSlice';
 
 const cx = classNames.bind(style);
 function LoginEmailForm({ setForm, setIsBackLogin }) {
     const [showPassword, setShowPassword] = useState(true);
     const dispatch = useDispatch();
+    const theme = useTheme();
     const formik = useFormik({
         initialValues: {
             email: '',
@@ -36,7 +38,9 @@ function LoginEmailForm({ setForm, setIsBackLogin }) {
     return (
         <form onSubmit={formik.handleSubmit}>
             <div className={cx('login-email__content')}>
-                <h2 className={cx('login-email__title')}>Log in</h2>
+                <h2 style={{ color: theme.palette.textColor.main }} className={cx('login-email__title')}>
+                    Log in
+                </h2>
                 <div className={cx('login-email__inputs-wrap')}>
                     <TextField
                         InputProps={{
@@ -80,12 +84,14 @@ function LoginEmailForm({ setForm, setIsBackLogin }) {
                     {formik.touched.password && formik.errors.password ? (
                         <div className={cx('login-email__password-error')}>{formik.errors.password}</div>
                     ) : null}
-                    <span className={cx('forgot-password')}>Forgot Password?</span>
+                    <span style={{ color: theme.palette.textColor.main }} className={cx('forgot-password')}>
+                        Forgot Password?
+                    </span>
                     <Button type="submit" className={cx('login-email__button')} primary large>
                         Log in
                     </Button>
                 </div>
-                <p className={cx('login__inform--signup')}>
+                <p style={{ color: theme.palette.textColor.main }} className={cx('login__inform--signup')}>
                     Don’t have an account?
                     <span
                         onClick={() => {

@@ -52,7 +52,9 @@ export const themeSettings = (mode) => {
                       },
                       textColor: {
                           main: colorTokens.grey[0],
-                          secondary: colorTokens.grey[200],
+                          secondary: colorTokens.grey[300],
+                          third: colorTokens.grey[600],
+                          fourth: colorTokens.grey[600],
                       },
                       scrollColor: {
                           thumb: colorTokens.grey[600],
@@ -67,6 +69,7 @@ export const themeSettings = (mode) => {
                           greyHover5: colorTokens.grey[700],
                           greyHover6: colorTokens.grey[800],
                       },
+                      xMarkColor: colorTokens.grey[1000],
                       background: {
                           default: colorTokens.grey[900],
                           alt: colorTokens.grey[800],
@@ -94,6 +97,8 @@ export const themeSettings = (mode) => {
                       textColor: {
                           main: colorTokens.grey[1000],
                           secondary: colorTokens.grey[600],
+                          third: colorTokens.grey[300],
+                          fourth: colorTokens.grey[200],
                       },
                       scrollColor: {
                           thumb: colorTokens.grey[50],
@@ -108,6 +113,7 @@ export const themeSettings = (mode) => {
                           greyHover5: colorTokens.grey[50],
                           greyHover6: colorTokens.grey[10],
                       },
+                      xMarkColor: colorTokens.grey[50],
                       background: {
                           default: colorTokens.grey[0],
                           alt: colorTokens.grey[10],

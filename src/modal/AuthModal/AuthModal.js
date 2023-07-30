@@ -62,6 +62,7 @@ function AuthModal() {
                     className={`${cx('login__wrapper')} ${classes.wrapper}`}
                 >
                     <div
+                        style={{ backgroundColor: theme.palette.xMarkColor }}
                         onClick={() => {
                             dispatch(authenticationSlice.actions.changeIsOpenModal(false));
                         }}
@@ -79,6 +80,9 @@ function AuthModal() {
                                 setForm(authForms.LoginOption);
                                 setIsBackLogin(false);
                             }}
+                            style={{
+                                color: theme.palette.textColor.main,
+                            }}
                             className={cx('back-icon')}
                             icon={faArrowLeft}
                         />
@@ -88,6 +92,9 @@ function AuthModal() {
                             onClick={() => {
                                 setForm(authForms.SignUpOption);
                                 setIsBackSignUp(false);
+                            }}
+                            style={{
+                                color: theme.palette.textColor.main,
                             }}
                             className={cx('back-icon')}
                             icon={faArrowLeft}
