@@ -2,6 +2,8 @@ import PropTypes from 'prop-types';
 import Tippy from '@tippyjs/react/headless';
 import classNames from 'classnames/bind';
 import { useEffect, useState } from 'react';
+import { makeStyles } from '@mui/styles';
+import { useTheme } from '@mui/material';
 import { Wrapper as WrapperList } from '~/components/Popper';
 import style from '~/components/Popper/Menu/Menu.module.scss';
 import Header from './Header';
@@ -11,14 +13,30 @@ const cx = classNames.bind(style);
 
 const defaultFn = () => {};
 function Menu({ children, items, hideOnClick = false, onChange = { defaultFn } }) {
+    const useStyle = makeStyles((theme) => ({
+        menuItem: {
+            backgroundColor: theme.palette.background.alt,
+            color: theme.palette.textColor.main,
+            '&:hover': {
+                backgroundColor: theme.palette.hover.greyHover5,
+            },
+        },
+        header: {
+            color: theme.palette.textColor.main,
+        },
+    }));
     const [history, setHistory] = useState([{ data: items }]);
     const current = history[history.length - 1];
+    const classes = useStyle();
+    const theme = useTheme();
+
     useEffect(() => {
         setHistory([{ data: items }]);
     }, [items]);
     const renderItem = () =>
         current.data.map((item, index) => (
             <MenuItem
+                className={classes.menuItem}
                 key={index}
                 data={item}
                 onClick={() => {
@@ -36,7 +54,7 @@ function Menu({ children, items, hideOnClick = false, onChange = { defaultFn } }
     };
     const renderResult = (attrs) => (
         <div className={cx('menu-list')} tabIndex="-1" {...attrs}>
-            <WrapperList className={cx('menu-popper')}>
+            <WrapperList style={{ backgroundColor: theme.palette.background.alt }} className={cx('menu-popper')}>
                 {history.length > 1 && <Header title={current.title} onBack={handleBack} />}
                 <div className={cx('menu-body')}>{renderItem()}</div>
             </WrapperList>

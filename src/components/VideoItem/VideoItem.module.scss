@@ -61,6 +61,7 @@
 
 .video-wrapper {
     display: flex;
+    margin-left: 70px;
 
     .content-wrapper {
         position: relative;
@@ -94,7 +95,6 @@
     height: 510px;
     object-fit: fill;
     border-radius: 12px;
-    margin-left: 70px;
 }
 
 .interactive-user {

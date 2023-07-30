@@ -6,7 +6,6 @@
         display: flex;
         align-items: center;
         padding: 8px;
-        margin-left: 4px;
         color: var(--text-color);
         text-decoration: none;
         border-radius: 4px;
@@ -20,10 +19,6 @@
             .icon {
                 display: none;
             }
-        }
-
-        &:hover {
-            background: rgba(22, 24, 35, 0.03);
         }
 
         .activeIcon {

@@ -5,6 +5,7 @@ import { useEffect, useState, useRef } from 'react';
 import classNames from 'classnames/bind';
 import style from './Search.module.scss';
 import { useTheme } from '@emotion/react';
+import { makeStyles } from '@mui/styles';
 
 import * as searchService from '~/services/searchService';
 import { useDebounce } from '~/hooks';
@@ -13,8 +14,16 @@ import AccountItem from '~/components/AccountItem';
 import { SearchIcon } from '~/assets/icons';
 import { Button } from '@mui/material';
 
+const useStyle = makeStyles((theme) => ({
+    accoutItemWrap: {
+        '&:hover': {
+            backgroundColor: theme.palette.hover.greyHover5,
+        },
+    },
+}));
 const cx = classNames.bind(style);
 function Search() {
+    const classes = useStyle();
     const theme = useTheme();
     const [searchResult, setSearchResult] = useState([]);
     const [searchValue, setSearchValue] = useState('');
@@ -69,10 +78,13 @@ function Search() {
                 visible={showResult && searchResult.length > 0}
                 render={(attrs) => (
                     <div className={cx('search-result')} tabIndex="-1" {...attrs}>
-                        <WrapperResult>
-                            <h4 className={cx('search-title')}> Accounts</h4>
+                        <WrapperResult style={{ backgroundColor: theme.palette.background.alt }}>
+                            <h4 style={{ color: theme.palette.textColor.secondary }} className={cx('search-title')}>
+                                {' '}
+                                Accounts
+                            </h4>
                             {searchResult.map((item) => (
-                                <AccountItem key={item.id} data={item} />
+                                <AccountItem classNameOfWrap={classes.accoutItemWrap} key={item.id} data={item} />
                             ))}
                         </WrapperResult>
                     </div>
@@ -109,10 +121,14 @@ function Search() {
                     <Button
                         sx={{
                             minWidth: '52px!important',
-                            backgroundColor: 'transparent',
+                            borderTopRightRadius: 'var(--search-border-radius)',
+                            borderBottomRightRadius: 'var(--search-border-radius)',
                             color: theme.palette.headerClear.main,
                             '&::after': {
                                 backgroundColor: theme.palette.devider.main,
+                            },
+                            '&:hover': {
+                                backgroundColor: theme.palette.hover.greyHover4,
                             },
                         }}
                         className={cx('search-btn')}

@@ -2,7 +2,7 @@ const config = {
     home: '/',
     following: '/following',
     live: '/live',
-    profile: '/:nickname',
+    profile: '/@nickname',
     upload: '/upload',
     search: '/search',
 };

@@ -16,11 +16,12 @@ export const colorTokens = {
         1000: '#000000',
     },
     primary: {
-        300: '#f47991',
-        400: '#f54e6f',
-        500: '#fe2c55',
-        600: '#fc1342',
-        700: '#fe0033',
+        100: 'rgba(254,44,85,0.1)',
+        200: 'rgba(254,44,85,0.2)',
+        400: 'rgba(254,44,85,0.4)',
+        600: 'rgba(254,44,85,0.6)',
+        800: 'rgba(254,44,85,0.8)',
+        1000: 'rgba(254,44,85,1)',
     },
 };
 
@@ -60,6 +61,12 @@ export const themeSettings = (mode) => {
                       tippyColor: {
                           main: colorTokens.grey[700],
                       },
+                      hover: {
+                          primaryHover: colorTokens.primary[100],
+                          greyHover4: colorTokens.grey[600],
+                          greyHover5: colorTokens.grey[700],
+                          greyHover6: colorTokens.grey[800],
+                      },
                       background: {
                           default: colorTokens.grey[900],
                           alt: colorTokens.grey[800],
@@ -94,6 +101,12 @@ export const themeSettings = (mode) => {
                       },
                       tippyColor: {
                           main: colorTokens.grey[0],
+                      },
+                      hover: {
+                          primaryHover: colorTokens.primary[100],
+                          greyHover4: colorTokens.grey[100],
+                          greyHover5: colorTokens.grey[50],
+                          greyHover6: colorTokens.grey[10],
                       },
                       background: {
                           default: colorTokens.grey[0],

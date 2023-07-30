@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { makeStyles } from '@mui/styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRightFromBracket, faEllipsisVertical, faPlus } from '@fortawesome/free-solid-svg-icons';
 import Tippy from '@tippyjs/react';
@@ -32,8 +33,17 @@ import { useEffect, useRef } from 'react';
 import themeSlice from '~/redux-toolkit/Slices/themeSlice';
 import DarkModeSwitch from '~/components/DarkModeSwitch';
 
+const useStyle = makeStyles((theme) => ({
+    uploadButton: {
+        '&:hover': {
+            backgroundColor: `${theme.palette.hover.greyHover6}!important`,
+        },
+    },
+}));
+
 const cx = classNames.bind(style);
 function Header() {
+    const classes = useStyle();
     const theme = useTheme();
     const backgroundColor = theme.palette.background.default;
     const logoColor = theme.palette.logo.main;
@@ -43,6 +53,8 @@ function Header() {
     const navigate = useNavigate();
     const isCurrentUser = useSelector(iscurrentUserSelector);
     const isOpenAuthModal = useSelector(isOpenAuthModalSelector);
+    // check Mode
+    isDarkMode.current = mode === 'dark' ? true : false;
     const MENU_ITEMS = [
         {
             icon: <FontAwesomeIcon icon={faCopyright} />,
@@ -105,12 +117,6 @@ function Header() {
     ];
     let items = MENU_ITEMS;
     items = isCurrentUser ? userMenu : MENU_ITEMS;
-    // check Mode
-    useEffect(() => {
-        isDarkMode.current = mode === 'dark' ? true : false;
-    }, [mode]);
-    console.log(mode);
-    console.log(isDarkMode.current);
     // handle Logic
     const handleOnchange = (item) => {
         switch (item.title) {
@@ -144,6 +150,7 @@ function Header() {
 
                 <div className={cx('action')}>
                     <Button
+                        className={classes.uploadButton}
                         style={{
                             backgroundColor: theme.palette.headerButton.main,
                             color: theme.palette.textColor.main,

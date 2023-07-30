@@ -1,5 +1,6 @@
 import TippyHeadless from '@tippyjs/react/headless';
 import { useTheme } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import AccountPreview from './AccountPreview/';
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -8,9 +9,18 @@ import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import style from './SuggestAccounts.module.scss';
 import ImageComp from '~/components/Image';
 
+const useStyle = makeStyles((theme) => ({
+    accountItemWrap: {
+        '&:hover': {
+            backgroundColor: theme.palette.hover.greyHover5,
+        },
+    },
+}));
+
 const cx = classNames.bind(style);
 function AccountItem({ image, name, nickName, check, isPreview, followersCount, likesCount }) {
     const theme = useTheme();
+    const classes = useStyle();
     const renderPreview = (props) => (
         <div className={cx('preview')} tabIndex="-1" {...props}>
             <AccountPreview
@@ -26,7 +36,7 @@ function AccountItem({ image, name, nickName, check, isPreview, followersCount, 
     return (
         <div>
             <TippyHeadless render={isPreview ? renderPreview : () => {}} interactive delay={[900, 0]}>
-                <div className={cx('account-item')}>
+                <div className={`${cx('account-item')} ${classes.accountItemWrap}`}>
                     <ImageComp className={cx('account-picture')} src={image} alt="account-picture" />
                     <div style={{ color: theme.palette.textColor.main }} className={cx('account-info')}>
                         <h4 className={cx('nickname')}>
