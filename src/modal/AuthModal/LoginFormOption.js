@@ -1,6 +1,7 @@
 import LoginOption from '~/components/Login/index';
 import style from './AuthModal.module.scss';
 import classNames from 'classnames/bind';
+import { makeStyles } from '@mui/styles';
 import {
     AppleIcon,
     FacebookIcon,
@@ -14,11 +15,16 @@ import {
 import { authForms } from '~/constants/constants';
 
 const cx = classNames.bind(style);
-
+const useStyle = makeStyles((theme) => ({
+    loginContent: {
+        // backgroundColor: theme.palette.background.default,
+    },
+}));
 function LoginFormOption({ setForm, setIsBackLogin }) {
+    const classes = useStyle();
     return (
         <form>
-            <div className={cx('login__content')}>
+            <div className={`${cx('login__content')} ${classes.loginContent}`}>
                 <h2 className={cx('login__title')}>Log in to TikTok</h2>
                 <LoginOption
                     disable={true}

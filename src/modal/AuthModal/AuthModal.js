@@ -1,6 +1,8 @@
 import classNames from 'classnames/bind';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { makeStyles } from '@mui/styles';
+import { useTheme } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
@@ -13,10 +15,17 @@ import { authForms } from '~/constants/constants';
 import { isOpenAuthModalSelector } from '~/redux-toolkit/selectors/authenticationSelector';
 import authenticationSlice from '~/redux-toolkit/Slices/authenticationSlice';
 const cx = classNames.bind(style);
+const useStyle = makeStyles((theme) => ({
+    wrapper: {
+        backgroundColor: theme.palette.background.default,
+    },
+}));
 function AuthModal() {
     const [form, setForm] = useState(authForms.LoginFormOption);
     const [isBackLogin, setIsBackLogin] = useState(false);
     const [isBackSignUp, setIsBackSignUp] = useState(false);
+    const classes = useStyle();
+    const theme = useTheme();
     const dispatch = useDispatch();
     const isOpenAuthModal = useSelector(isOpenAuthModalSelector);
     let FormComp = LoginFormOption;
@@ -50,7 +59,7 @@ function AuthModal() {
                     onClick={(e) => {
                         e.stopPropagation();
                     }}
-                    className={cx('login__wrapper')}
+                    className={`${cx('login__wrapper')} ${classes.wrapper}`}
                 >
                     <div
                         onClick={() => {
@@ -58,7 +67,11 @@ function AuthModal() {
                         }}
                         className={cx('icon-x-wrap')}
                     >
-                        <FontAwesomeIcon className={cx('close-icon')} icon={faXmark} />
+                        <FontAwesomeIcon
+                            style={{ color: theme.palette.textColor.main }}
+                            className={cx('close-icon')}
+                            icon={faXmark}
+                        />
                     </div>
                     {isBackLogin && (
                         <FontAwesomeIcon
